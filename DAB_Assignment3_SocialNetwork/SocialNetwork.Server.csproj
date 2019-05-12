@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <RootNamespace>SocialNetwork.Server</RootNamespace>
+    <AssemblyName>SocialNetwork.Server</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
