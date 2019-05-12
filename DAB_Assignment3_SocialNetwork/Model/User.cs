@@ -18,9 +18,8 @@ namespace SocialNetwork.Server.Model
         public string Gender { get; set; }
         public ObjectId Feed { get; set; }
         public ObjectId Wall { get; set; }
-        public List<ObjectId> PostIds { get; set; }
+        public List<ObjectId> PublicPostIds { get; set; }
         public List<ObjectId> SubscriberIds { get; set; }
-        public List<ObjectId> SubscriptionIds { get; set; }
         public List<ObjectId> BlockedSubscriberIds { get; set; }
     }
 }
