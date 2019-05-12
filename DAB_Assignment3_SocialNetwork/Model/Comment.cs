@@ -8,7 +8,9 @@ namespace SocialNetwork.Server.Model
     {
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime CommentTimeStamp { get; set; }
-        public ObjectId CommentAuthorUserId { get; set; }
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string CommentAuthorUserId { get; set; }
         public string Text { get; set; }
     }
 }
