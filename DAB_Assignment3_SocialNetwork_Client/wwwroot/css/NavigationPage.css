@@ -1,2 +1,13 @@
-﻿body {
+﻿.navigation {
+    margin-top: 20px;
+    margin-bottom: 20px; 
+    padding-top: 20px;
+    padding-bottom: 20px; 
+    background-color: #4e71ba; 
+}
+
+.navigationtext {
+    color: white;
+    font-weight: bolder;
+    font-size: large; 
 }

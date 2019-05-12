@@ -21,19 +21,19 @@
               integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/NavigationPage.css"/>
 </head>
 <body>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-2"><a asp-controller="Home" asp-action="Feed">Feed</a></div>
-        <div class="col-md-2"><a asp-controller="Home" asp-action="Wall">Wall</a></div>
-        <div class="col-md-2"><a asp-controller="Home" asp-action="CreatePost">Create Post</a></div>
-        <div class="col-md-2"><a asp-controller="Home" asp-action="FollowUser">Follow User</a></div>
-        <div class="col-md-2"><a asp-controller="Home" asp-action="BlockedUser">Blocked Users</a></div>
-        <div class="col-md-2"><a asp-controller="Home" asp-action="Account">Account</a></div>
+    <div class="row navigation" >
+        <div class="col-md-2"><a asp-controller="Home" class="navigationtext" asp-action="Feed">Feed</a></div>
+        <div class="col-md-2"><a asp-controller="Home" class="navigationtext" asp-action="Wall">Wall</a></div>
+        <div class="col-md-2"><a asp-controller="Home" class="navigationtext" asp-action="CreatePost">Create Post</a></div>
+        <div class="col-md-2"><a asp-controller="Home" class="navigationtext" asp-action="FollowUser">Follow User</a></div>
+        <div class="col-md-2"><a asp-controller="Home" class="navigationtext" asp-action="BlockedUser">Blocked Users</a></div>
+        <div class="col-md-2"><a asp-controller="Home" class="navigationtext" asp-action="Account">Account</a></div>
     </div>
-    </br>
 
     <main role="main" class="pb-3">
         @RenderBody()
