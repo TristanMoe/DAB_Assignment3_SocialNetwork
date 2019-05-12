@@ -9,20 +9,17 @@ namespace SocialNetwork.Server.Model
 {
     public class User
     {
-
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public ObjectId UserId { get; set; }
 
-        [BsonElement("FirstName")]
         public string FirstName { get; set; }
-        [BsonElement("LastName")]
         public string LastName { get; set; }
-
-        [BsonElement("Email")]
         public string Email { get; set; }
-
-        [BsonElement("Gender")]
         public string Gender { get; set; }
+        public ObjectId Feed { get; set; }
+        public ObjectId Wall { get; set; }
+        public List<ObjectId> PublicPostIds { get; set; }
+        public List<ObjectId> SubscriberIds { get; set; }
+        public List<ObjectId> BlockedSubscriberIds { get; set; }
     }
 }
