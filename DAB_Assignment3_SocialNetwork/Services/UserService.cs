@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -6,6 +7,15 @@ using SocialNetwork.Server.Model;
 
 namespace SocialNetwork.Server.Services
 {
+    public class UserExistsException : Exception
+    {
+        public UserExistsException()
+        {}
+
+        public UserExistsException(string msg): base(msg)
+        {}
+    }
+
     public class UserService
     {
         private readonly IMongoCollection<User> _usersCollection;
@@ -26,8 +36,17 @@ namespace SocialNetwork.Server.Services
             return _usersCollection.Find<User>(user => user.UserId == id).FirstOrDefault();
         }
 
+        public User Get(string email,string password)
+        {
+            return _usersCollection.Find<User>(user => 
+                user.Email == email && user.Password == password).FirstOrDefault();
+        }
+
         public User Create(User user)
         {
+            var userExists = _usersCollection.Find(u => u.Email == user.Email).FirstOrDefault();
+            if (userExists != null)
+                throw new UserExistsException($"Email already in use {user.Email}");
             _usersCollection.InsertOne(user);
             return user;
         }
@@ -47,4 +66,5 @@ namespace SocialNetwork.Server.Services
             _usersCollection.DeleteOne(user => user.UserId == id);
         }
     }
+
 }

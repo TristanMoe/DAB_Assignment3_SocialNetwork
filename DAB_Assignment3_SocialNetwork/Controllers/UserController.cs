@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SocialNetwork.Server.Model;
 using SocialNetwork.Server.Services;
+using System.Web.Http;
 
 namespace SocialNetwork.Server.Controllers
 {
@@ -28,18 +29,32 @@ namespace SocialNetwork.Server.Controllers
         }
 
         // GET: api/User/5
-        [HttpGet("{id:length(24)}", Name = "Get")]
+        [HttpGet("{email, password}", Name = "GetUserByCredentials")]
+        public ActionResult<User> Get(string email,string password)
+        {
+            return _userService.Get(email,password);
+        }
+
+        [HttpGet("{id}", Name = "GetUserById")]
         public ActionResult<User> Get(string id)
         {
             return _userService.Get(id);
         }
 
+
         // POST: api/User
         [HttpPost]
         public ActionResult<User> Create(User user)
         {
-            _userService.Create(user);
-            return CreatedAtRoute("GetUser", new {id = user.UserId.ToString()}, user);
+            try
+            {
+                _userService.Create(user);
+                return CreatedAtRoute("GetUserById", new { id = user.UserId }, user);
+            }
+            catch (UserExistsException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // PUT: api/User/5
@@ -59,6 +74,7 @@ namespace SocialNetwork.Server.Controllers
         [HttpDelete("{id:length(24)}")]
         public void Delete(string id)
         {
+            _userService.Remove(id);
         }
     }
 }
