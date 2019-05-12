@@ -8,8 +8,9 @@ namespace SocialNetwork.Server.Model
     public class UserFeed
     {
         [BsonId]
-        public ObjectId FeedId { get; set; }
-        public List<ObjectId> SubscriptionIds { get; set; }
-        public List<ObjectId> GroupFeedIds { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string FeedId { get; set; }
+        public List<string> SubscriptionIds { get; set; }
+        public List<string> GroupFeedIds { get; set; }
     }
 }
