@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace DAB_Assignment3_SocialNetwork
+namespace SocialNetwork.Server
 {
     public class Program
     {

@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAB_Assignment3_SocialNetwork_Server", "DAB_Assignment3_SocialNetwork\DAB_Assignment3_SocialNetwork_Server.csproj", "{522218DE-B431-4166-ABF0-8E3D27767B4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Server", "DAB_Assignment3_SocialNetwork\SocialNetwork.Server.csproj", "{522218DE-B431-4166-ABF0-8E3D27767B4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAB_Assignment3_SocialNetwork_Client", "DAB_Assignment3_SocialNetwork_Client\DAB_Assignment3_SocialNetwork_Client.csproj", "{2B02A1BE-23C4-47A4-97DD-9301A1FE65F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Client", "DAB_Assignment3_SocialNetwork_Client\SocialNetwork.Client.csproj", "{2B02A1BE-23C4-47A4-97DD-9301A1FE65F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
