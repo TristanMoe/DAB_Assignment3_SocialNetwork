@@ -9,7 +9,7 @@
     <post-template v-for="post in posts"
                    v-bind:username="post.username"
                    v-bind:content="post.postContent"
-                   v-bind:comments="comments"
+                   v-bind:comments="post.comments"
                    ></post-template>
 </div>
 
@@ -26,9 +26,9 @@
         <div v-for="comment in comments" class="col-sm-12 comment ">
             {{comment.text}}
         </div>
-        <div class="row commentBtn" >
-            <input class="col-9" v-model="currentComment"/>
-            <button class="col-3" v-on:click="$emit('addComment(currentComment)')">Comment</button>
+        <div class="row commentBtn rounded" >
+            <input class="col-10 rounded" v-model="currentComment"/>
+            <button class="col-2 rounded" v-on:click="$emit('addComment(currentComment)')">Comment</button>
         </div>
     </div>
 </script>
@@ -47,11 +47,20 @@
         el: '#wall',
         data: {
             posts: [
-                { username: 'Tristan', postContent: 'Hej med jer!' }
-            ],
-            comments: [
-                { text: "Hej igen!" },
-                { text: "Jamen dog!" }
+                {
+                    username: 'Tristan Møller', postContent: 'Hej med jer!',
+                    comments: [
+                        { text: "Hej igen!" },
+                        { text: "Jamen dog!" }
+                        ]
+                },
+                {
+                    username: 'Marcus Gasberg', postContent: 'Hvorfor er I ikke færdige endnu?',
+                    comments: [
+                        { text: "Vi gør vores bedste!" },
+                        { text: "Ti dog stille!" }
+                    ]
+                }
             ],
             currentComment: ''
         },
