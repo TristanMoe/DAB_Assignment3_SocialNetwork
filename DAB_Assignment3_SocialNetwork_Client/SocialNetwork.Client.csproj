@@ -20,4 +20,9 @@
     <ProjectReference Include="..\DAB_Assignment3_SocialNetwork\SocialNetwork.Server.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
 </Project>

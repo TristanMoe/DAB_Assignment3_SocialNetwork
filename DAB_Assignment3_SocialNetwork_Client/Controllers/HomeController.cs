@@ -10,6 +10,11 @@ namespace DAB_Assignment3_SocialNetwork_Client.Controllers
 {
     public class HomeController : Controller
     {
+        public IActionResult Home()
+        {
+            return View(); 
+        }
+
         public IActionResult Feed()
         {
             return View();
