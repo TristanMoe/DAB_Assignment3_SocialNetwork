@@ -14,9 +14,9 @@ namespace SocialNetwork.Server.Services
         private readonly IMongoCollection<Post> _posts;
         public PostServices(IConfiguration config)
         {
-            var client = new MongoClient(config.GetConnectionString("BookstoreDb"));
-            var database = client.GetDatabase("BookstoreDb");
-            _posts = database.GetCollection<Post>("Books");
+            var client = new MongoClient(config.GetConnectionString("SocialNetworkDb"));
+            var database = client.GetDatabase("SocialNetworkDb");
+            _posts = database.GetCollection<Post>("Post");
         }
 
         public List<Post> GetPublicPosts(List<string> ids)
