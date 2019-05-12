@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace DAB_Assignment3_SocialNetwork
+namespace SocialNetwork.Server
 {
     public class Startup
     {

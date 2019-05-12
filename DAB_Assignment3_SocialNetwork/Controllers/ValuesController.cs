@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DAB_Assignment3_SocialNetwork.Controllers
+namespace SocialNetwork.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

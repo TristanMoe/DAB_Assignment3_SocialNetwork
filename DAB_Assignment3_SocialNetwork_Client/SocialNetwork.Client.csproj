@@ -4,6 +4,8 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <UserSecretsId>aspnet-DAB_Assignment3_SocialNetwork_Client-5A9EAEFD-3BB9-4237-AD15-D4FAFB3F001C</UserSecretsId>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <AssemblyName>SocialNetwork.Client</AssemblyName>
+    <RootNamespace>SocialNetwork_Client</RootNamespace>
   </PropertyGroup>
 
 
@@ -15,7 +17,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\DAB_Assignment3_SocialNetwork\DAB_Assignment3_SocialNetwork_Server.csproj" />
+    <ProjectReference Include="..\DAB_Assignment3_SocialNetwork\SocialNetwork.Server.csproj" />
   </ItemGroup>
 
 </Project>
