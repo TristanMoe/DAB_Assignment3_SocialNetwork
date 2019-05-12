@@ -47,6 +47,7 @@ namespace SocialNetwork.Server.Controllers
 
         // PUT: api/Post/5
 
+        [Route("/api/Post/InsertPost")]
         [HttpPost]
         public void InsertPost([FromBody]Post post)
         {
