@@ -70,7 +70,7 @@ namespace DAB_Assignment3_SocialNetwork_Client
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Feed}/{id?}");
             });
         }
     }

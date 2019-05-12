@@ -10,14 +10,34 @@ namespace DAB_Assignment3_SocialNetwork_Client.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Feed()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Wall()
         {
             return View();
+        }
+
+        public IActionResult CreatePost()
+        {
+            return View(); 
+        }
+
+        public IActionResult FollowUser()
+        {
+            return View();
+        }
+
+        public IActionResult BlockedUser()
+        {
+            return View(); 
+        }
+
+        public IActionResult Account()
+        {
+            return View(); 
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
