@@ -13,34 +13,33 @@
                    ></post-template>
 </div>
 
+
 <script type="text/x-template" id="post">
     <div id="post">
         <div class="media text-muted pt-3">
             <img src="/Images/icons8-administrator-male-52.png" width="40" height="40" />
             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                 <strong class="d-block text-gray-dark">{{username}}</strong>
-                {{Content}}
+                {{content}}
             </p>
         </div>
         <div v-for="comment in comments" class="col-sm-12 comment ">
             {{comment.text}}
         </div>
         <div class="row commentBtn" >
-            <input class="col-9"/>
-            <button class="col-3" v-on:click="$emit('addComment')">Comment</button>
+            <input class="col-9" v-model="currentComment"/>
+            <button class="col-3" v-on:click="$emit('addComment(currentComment)')">Comment</button>
         </div>
     </div>
 </script>
-<!-- Component-->
+
 <script>
     Vue.component('post-template', {
-        props: ['username', 'content', 'comments', 'currentComment'],
-        template: '#post',
-        addComment: function() {
-            comments.add(this.currentComment); 
-        }
+        props: ['username', 'content', 'comments'],
+        template: '#post'
     })
 </script>
+
 
 <!-- Her skal der fetches!-->
 <script>
@@ -53,7 +52,11 @@
             comments: [
                 { text: "Hej igen!" },
                 { text: "Jamen dog!" }
-            ]
+            ],
+            currentComment: ''
+        },
+        addComment: function() {
+            comments.add(currentComment); 
         }
     })
 </script>
