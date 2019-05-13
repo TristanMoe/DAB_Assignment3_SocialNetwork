@@ -4,14 +4,71 @@
 }
 
 <h1>User Wall</h1>
-<div class="my-3 p-3 bg-white rounded box-shadow">
+<div class="my-3 p-3 bg-white rounded box-shadow" id="wall">
     <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
-    <div class="media text-muted pt-3">
-        <img src="/Images/icons8-administrator-male-52.png" width="40" height="40" />
-        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <strong class="d-block text-gray-dark">Tristan Møller</strong>
-            Hvad er klokken?
-        </p>
-    </div>
+    <post-template v-for="post in posts"
+                   v-bind:username="post.username"
+                   v-bind:content="post.postContent"
+                   v-bind:comments="post.comments"
+                   ></post-template>
 </div>
+
+
+<script type="text/x-template" id="post">
+    <div id="post">
+        <div class="media text-muted pt-3">
+            <img src="/Images/icons8-administrator-male-52.png" width="40" height="40" />
+            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <strong class="d-block text-gray-dark">{{username}}</strong>
+                {{content}}
+            </p>
+        </div>
+        <div v-for="comment in comments" class="col-sm-12 comment ">
+            <img src="/Images/icons8-administrator-male-52.png" width="15" height="15" />
+            "{{comment.text}}", {{comment.username}}
+            </p>
+        </div>
+        <div class="row commentBtn rounded" >
+            <input class="col-10 rounded" v-model="currentComment"/>
+            <button class="col-2 rounded" v-on:click="$emit('addComment(currentComment)')">Comment</button>
+        </div>
+    </div>
+</script>
+
+<script>
+    Vue.component('post-template', {
+        props: ['username', 'content', 'comments'],
+        template: '#post'
+    })
+</script>
+
+
+<!-- Her skal der fetches!-->
+<script>
+    new Vue({
+        el: '#wall',
+        data: {
+            posts: [
+                {
+                    username: 'Tristan Møller', postContent: 'Hej med jer!',
+                    comments: [
+                        { text: "Hej igen!", username:'Martin Jespersen' },
+                        { text: "Jamen dog!", username: 'Marcus Gasberg' }
+                        ]
+                },
+                {
+                    username: 'Marcus Gasberg', postContent: 'Hvorfor er I ikke færdige endnu?',
+                    comments: [
+                        { text: "Vi gør vores bedste!", username: 'Tristan Møller' },
+                        { text: "Ti dog stille!", username: 'Mathias Hansen' }
+                    ]
+                }
+            ],
+            currentComment: ''
+        },
+        addComment: function() {
+            comments.add(currentComment); 
+        }
+    })
+</script>
 

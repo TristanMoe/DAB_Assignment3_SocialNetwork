@@ -1,0 +1,17 @@
+﻿body {
+}
+
+.comment {
+    border-bottom: gray solid 1px; 
+    padding: 2px;
+    color: gray;
+    font-size: small; 
+}
+
+.commentBtn {
+    margin-top: 6px;
+    color: gray;
+    font-size: small;
+    margin-left: 2px;
+    margin-right: 2px;
+}

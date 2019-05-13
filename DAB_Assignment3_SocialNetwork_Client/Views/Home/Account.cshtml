@@ -3,5 +3,27 @@
     ViewData["Title"] = "Account";
 }
 
-<h1>Account</h1>
+<div id="vueAccount">
+    <h1>Account information</h1>
+    <hr />
+    <div class="row">
+        <div class="col-2">Email:</div>
+        <div class="col-10">"{{data.email}}"</div>
+    </div>
+    <div class="row">
+        <div class="col-2">Name:</div>
+        <div class="col-10">"{{data.name}}"</div>
+    </div>
+    <div class="row">
+        <div class="col-2">Gender:</div>
+        <div class="col-10">"{{data.gender}}"</div>
+    </div>
+    <div class="row">
+        <div class="col-2">Age:</div>
+        <div class="col-10">"{{data.age}}"</div>
+    </div>
+</div>
 
+@section Scripts{
+    <script src="~/js/account-vue.js" asp-append-version="true"></script>
+}

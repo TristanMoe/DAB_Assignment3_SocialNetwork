@@ -3,5 +3,27 @@
     ViewData["Title"] = "BlockedUser";
 }
 
-<h1>BlockedUser</h1>
+<h1>Blocked users</h1>
+<hr />
+<div id="vueBlockUser">
+    <form class="form-signin">
+        <label for="inputEmail">Email address to block:</label>
+        <div class="form-label-group">
+            <input type="email" id="inputEmail" v-model="email" class="form-control" placeholder="Email address" required="" autofocus="">
+            <br />
+            <button v-on:click="BlockUser" class="btn btn-lg btn-primary btn-block" type="submit">Block</button>
+        </div>
+    </form>
+</div>
+<hr />
+<div id="vueBlockedUsers" style="font-size: x-large">
+    <h3>Currently blocked</h3>
+    <br/>
+    <ul>
+        <li v-for="blockeduser in blockedusers">{{blockeduser.name}}, {{blockeduser.email}}</li>
+    </ul>
+</div>
 
+@section Scripts{
+    <script src="~/js/blockeduser-vue.js" asp-append-version="true"></script>
+}
