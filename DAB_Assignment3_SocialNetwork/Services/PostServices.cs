@@ -44,7 +44,7 @@ namespace SocialNetwork.Server.Services
         public void UpdatePost(string id,Post post)
         {
             
-            var result = _posts.ReplaceOne(new BsonDocument("_id", id), post, new UpdateOptions { IsUpsert = true});
+            var result = _posts.ReplaceOne(p=>p.PostId==id,post);
         }
 
         
@@ -56,8 +56,8 @@ namespace SocialNetwork.Server.Services
         
         public void DeletePost(string Id)
         {
-            var filter = Builders<Post>.Filter.Eq("_id", Id);
-            _posts.DeleteOne(filter);
+            
+            _posts.DeleteOne(d=>d.PostId==Id);
         }
 
 

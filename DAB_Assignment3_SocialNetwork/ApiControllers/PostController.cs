@@ -21,8 +21,8 @@ namespace SocialNetwork.Server.Controllers
             _postServices = service;
         }
         // GET: api/Post
-        [HttpGet("{ids}")]
-        public ActionResult<List<Post>> GetPosts(List<string> ids)
+        [HttpGet]
+        public ActionResult<List<Post>> GetPosts([FromBody]List<string> ids)
         {
             return _postServices.GetPublicPosts(ids);
         }
@@ -44,7 +44,10 @@ namespace SocialNetwork.Server.Controllers
         [HttpPut("{id}")]       
         public void UpdatePost(string id,[FromBody]Post post)
         {
-           
+            var getPost=_postServices.GetPublicPost(id);
+            post.PostId = getPost.PostId;
+            if (getPost == null)
+                return;
             _postServices.UpdatePost(id,post);
             
         }
