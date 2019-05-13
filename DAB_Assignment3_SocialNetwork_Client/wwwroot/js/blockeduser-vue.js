@@ -5,11 +5,10 @@
     }, // need to check if user already blocked?
     methods: {
         BlockUser() {
-            let BlockedUser = {};
-            BlockedUser.email = this.email;
+            let email = this.email;
             fetch('api/BlockedUsers/', {
                     method: 'POST',
-                    body: JSON.stringify(BlockedUser),
+                    body: JSON.stringify(email),
                     headers: new Headers({
                     'Content-Type': 'application/json'
                     })
@@ -37,7 +36,7 @@ vm2 = new Vue({
     },
     methods: {
         GetBlockedUsers() {
-            fetch('.api/BlockedUsers/Users')
+            fetch('.api/User')
                 .then(function (response) {
                     if (response.status !== 200) {
                         console.log('Error detected. Status Code: ' + response.status);
