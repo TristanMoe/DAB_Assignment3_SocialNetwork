@@ -3,7 +3,22 @@
     ViewData["Title"] = "CreatePost";
 }
 
-<h1>What's on your mind, getUser().FirstName?</h1>
-<div class>
-
+<div class="border rounded row">
+    <h2 class="createPost col-md-12">Create Post</h2>
+    <div class="col-md-2">
+        <img class="logo" src="/Images/icons8-administrator-male-52.png" width="50" height="50"/>
+    </div>
+    <input class="col-md-10" v-model="inputText" />
+    <button class="btn btn-primary btn-lg shareBtn" type="submit">Share</button>
 </div>
+
+<script>
+    new Vue({
+        el: '#createPost',
+        data: {
+            user: applicationState.data.user,
+            inputText: 'What\'s on your mind, ' + user 
+            }
+    });
+</script>
+
