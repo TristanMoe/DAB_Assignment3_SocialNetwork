@@ -53,12 +53,12 @@
         },
         mounted() {
             //Get all posts for user
-            fetch('/api/GetPosts/' + getUser().ID).then(function(response) {
+            fetch('https://localhost:44375/api/Post/' + getUser().UserId).then(function(response) {
                 if (response.status !== 200) {
                     console.log('Looks like there was a problem. Status Code: ' + response.status)
                 };
                 //Build HTML 
-                this.posts = posts;
+                this.posts = response;
             });
         },
         addComment: function() {

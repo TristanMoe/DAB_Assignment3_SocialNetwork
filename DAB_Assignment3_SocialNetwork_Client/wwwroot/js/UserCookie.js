@@ -1,4 +1,4 @@
-﻿var userId = -1; 
+﻿var user = -1; 
 function getCookie() {
     let email = decodeURIComponent(document.cookie);
     return email; 
@@ -16,7 +16,7 @@ function deleteCookies() {
 }
 
 function saveUser(inputEmail, inputPassword) {
-    fetch('/api/UserController/', {
+    fetch('https://localhost:44375/api/User/', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -31,5 +31,5 @@ function saveUser(inputEmail, inputPassword) {
 }
 
 function getUser() {
-    return userId; 
+    return user; 
 }
