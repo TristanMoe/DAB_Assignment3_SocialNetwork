@@ -9,7 +9,7 @@
     <post-template v-for="post in posts"
                    v-bind:username="post.username"
                    v-bind:content="post.postContent"
-                   v-bind:comments="comments"
+                   v-bind:comments="post.comments"
                    ></post-template>
 </div>
 
@@ -24,11 +24,13 @@
             </p>
         </div>
         <div v-for="comment in comments" class="col-sm-12 comment ">
-            {{comment.text}}
+            <img src="/Images/icons8-administrator-male-52.png" width="15" height="15" />
+            "{{comment.text}}", {{comment.username}}
+            </p>
         </div>
-        <div class="row commentBtn" >
-            <input class="col-9" v-model="currentComment"/>
-            <button class="col-3" v-on:click="$emit('addComment(currentComment)')">Comment</button>
+        <div class="row commentBtn rounded" >
+            <input class="col-10 rounded" v-model="currentComment"/>
+            <button class="col-2 rounded" v-on:click="$emit('addComment(currentComment)')">Comment</button>
         </div>
     </div>
 </script>
@@ -47,11 +49,20 @@
         el: '#wall',
         data: {
             posts: [
-                { username: 'Tristan', postContent: 'Hej med jer!' }
-            ],
-            comments: [
-                { text: "Hej igen!" },
-                { text: "Jamen dog!" }
+                {
+                    username: 'Tristan Møller', postContent: 'Hej med jer!',
+                    comments: [
+                        { text: "Hej igen!", username:'Martin Jespersen' },
+                        { text: "Jamen dog!", username: 'Marcus Gasberg' }
+                        ]
+                },
+                {
+                    username: 'Marcus Gasberg', postContent: 'Hvorfor er I ikke færdige endnu?',
+                    comments: [
+                        { text: "Vi gør vores bedste!", username: 'Tristan Møller' },
+                        { text: "Ti dog stille!", username: 'Mathias Hansen' }
+                    ]
+                }
             ],
             currentComment: ''
         },

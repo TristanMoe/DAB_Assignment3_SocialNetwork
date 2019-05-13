@@ -11,7 +11,7 @@ vm = new Vue({
 },
 methods: {
     GetAccountInformation() {
-        fetch('.api/Account/Information')
+        fetch('.api/User/')
             .then(function(response) {
                 if (response.status !== 200) {
                     console.log('Error detected. Status Code: ' + response.status);
