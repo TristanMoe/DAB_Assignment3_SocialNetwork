@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Model;
-using SocialNetwork_Client.Services;
+using SocialNetwork.Services;
+
 
 namespace SocialNetwork.Client.ApiControllers
 {
@@ -13,42 +14,49 @@ namespace SocialNetwork.Client.ApiControllers
     [ApiController]
     public class GroupFeedController : ControllerBase
     {
-        private readonly GroupFeedServices _groupFeed;
-        public GroupFeedController()
+        private readonly GroupFeedServices _groupFeedServices;
+        public GroupFeedController(GroupFeedServices service)
         {
-            
+            _groupFeedServices = service;
         }
         // GET: api/GroupFeed
         [HttpGet]
         public IEnumerable<GroupFeed> Get(List<string> ids)
         {
-            return _groupFeed.GetGroupFeeds(ids);
+            return _groupFeedServices.GetGroupFeeds(ids);
         }
 
         // GET: api/GroupFeed/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public GroupFeed Get(string id)
         {
-            return _groupFeed.GetGroupFeed(id);
+            return _groupFeedServices.GetGroupFeed(id);
         }
 
         // POST: api/GroupFeed
         [HttpPost]
         public void Post([FromBody] GroupFeed feed)
         {
-            _groupFeed.InsertGroupFeed(feed);
+            _groupFeedServices.InsertGroupFeed(feed);
         }
 
         // PUT: api/GroupFeed/5
         [HttpPut("{id}")]
-        public void Put(string id, [FromBody] GroupFeed value)
+        public void Put(string id, [FromBody] GroupFeed feed)
         {
+            var getFeed = _groupFeedServices.GetGroupFeed(id);
+            feed.GroupFeedId = getFeed.GroupFeedId;
+            if (getFeed == null)
+                return;
+            _groupFeedServices.PutGroupFeed(id, feed);
+
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
         {
+            _groupFeedServices.DeleteGroupFeed(id);
         }
     }
 }
