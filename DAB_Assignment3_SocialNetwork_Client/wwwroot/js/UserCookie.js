@@ -1,4 +1,14 @@
-﻿var user = -1; 
+﻿var applicationState = {
+    data: {
+        user: "",
+        apiUrl: "https://localhost:44375/api/"
+    },
+    setUser(newUser) {
+        console.log("user got set to", user);
+        this.user = newUser;
+    }
+}
+
 function getCookie() {
     let email = decodeURIComponent(document.cookie);
     return email; 
@@ -28,8 +38,4 @@ function saveUser(inputEmail, inputPassword) {
             user = response; 
             console.log("You saved this item", response); //returns the new item along with its ID
         })
-}
-
-function getUser() {
-    return user; 
 }

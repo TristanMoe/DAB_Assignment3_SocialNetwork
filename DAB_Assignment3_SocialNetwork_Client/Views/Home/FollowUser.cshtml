@@ -15,11 +15,12 @@
     var vm = new Vue({
         el: '#app',
         data: {
-            users: ""
+            users: "",
+            sharedStateData: applicationState.data
         },
         methods: {
             fetchUsers() {
-                let url = "https://localhost:44300/api/User/";
+                let url = sharedStateData.apiUrl + "User/";
                 console.log(url);
                 fetch(url)
                     .then(
@@ -38,7 +39,7 @@
                     });
             },
             followUser(id) {
-                let url = "https://localhost:44300/api/User/" + id;
+                let url = sharedStateData.apiUrl + "User/" + id;
                 console.log(url);
                 fetch(url)
                     .then(
@@ -49,8 +50,7 @@
                             }
                             response.json()
                                 .then(function (userToSubscribeTo) {
-                                    let currentUser = store.user;
-                                    userToSubscribeTo.put("subscriberIds", currentUser.userId);
+                                    userToSubscribeTo.put("subscriberIds", sharedStateData.currentUser.userId);
                                 });
                         })
                     .catch(function(err) {
