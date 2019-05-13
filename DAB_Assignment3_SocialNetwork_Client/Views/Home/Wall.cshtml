@@ -24,7 +24,9 @@
             </p>
         </div>
         <div v-for="comment in comments" class="col-sm-12 comment ">
-            {{comment.text}}
+            <img src="/Images/icons8-administrator-male-52.png" width="15" height="15" />
+            "{{comment.text}}", {{comment.username}}
+            </p>
         </div>
         <div class="row commentBtn rounded" >
             <input class="col-10 rounded" v-model="currentComment"/>
@@ -50,15 +52,15 @@
                 {
                     username: 'Tristan Møller', postContent: 'Hej med jer!',
                     comments: [
-                        { text: "Hej igen!" },
-                        { text: "Jamen dog!" }
+                        { text: "Hej igen!", username:'Martin Jespersen' },
+                        { text: "Jamen dog!", username: 'Marcus Gasberg' }
                         ]
                 },
                 {
                     username: 'Marcus Gasberg', postContent: 'Hvorfor er I ikke færdige endnu?',
                     comments: [
-                        { text: "Vi gør vores bedste!" },
-                        { text: "Ti dog stille!" }
+                        { text: "Vi gør vores bedste!", username: 'Tristan Møller' },
+                        { text: "Ti dog stille!", username: 'Mathias Hansen' }
                     ]
                 }
             ],
