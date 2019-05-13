@@ -28,6 +28,8 @@ namespace SocialNetwork.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<PostServices>();
+            services.AddScoped<UserFeedService>();
+            services.AddScoped<GroupFeedServices>();
             services.AddScoped<UserService>();
 
             services.AddCors(options =>

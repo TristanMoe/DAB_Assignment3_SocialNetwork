@@ -29,7 +29,7 @@
             </p>
         </div>
         <div class="row commentBtn rounded" >
-            <input class="col-10 rounded" v-model="currentComment"/>
+            <input class="col-10 rounded"/>
             <button class="col-2 rounded" v-on:click="$emit('addComment(currentComment)')">Comment</button>
         </div>
     </div>
@@ -48,26 +48,21 @@
     new Vue({
         el: '#wall',
         data: {
-            posts: [
-                {
-                    username: 'Tristan Møller', postContent: 'Hej med jer!',
-                    comments: [
-                        { text: "Hej igen!", username:'Martin Jespersen' },
-                        { text: "Jamen dog!", username: 'Marcus Gasberg' }
-                        ]
-                },
-                {
-                    username: 'Marcus Gasberg', postContent: 'Hvorfor er I ikke færdige endnu?',
-                    comments: [
-                        { text: "Vi gør vores bedste!", username: 'Tristan Møller' },
-                        { text: "Ti dog stille!", username: 'Mathias Hansen' }
-                    ]
-                }
-            ],
-            currentComment: ''
+            user: '',
+            posts: []
+        },
+        mounted() {
+            //Get all posts for user
+            fetch('https://localhost:44375/api/Post/' + applicationState.data.user.userId).then(function(response) {
+                if (response.status !== 200) {
+                    console.log('Looks like there was a problem. Status Code: ' + response.status);
+                };
+                //Build HTML 
+                this.posts = response;
+            });
         },
         addComment: function() {
-            comments.add(currentComment); 
+            //comments.add(currentComment, getCookie()); 
         }
     })
 </script>
