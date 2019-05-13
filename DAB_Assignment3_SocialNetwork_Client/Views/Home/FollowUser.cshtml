@@ -3,5 +3,65 @@
     ViewData["Title"] = "FollowUser";
 }
 
-<h1>FollowUser</h1>
-
+<div id="app">
+    <dl id="musicianList" v-for="user in users">
+        <dt>{{user.firstName}} {{user.lastName}}</dt>
+        <dd>
+            <input type="button" v-on:click="followUser(user.userId)" />
+        </dd>
+    </dl>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            users: ""
+        },
+        methods: {
+            fetchUsers() {
+                let url = "https://localhost:44300/api/User/";
+                console.log(url);
+                fetch(url)
+                    .then(
+                        function(response) {
+                            if (response.status !== 200) {
+                                console.log("No Users Could be found");
+                                return;
+                            }
+                            response.json()
+                                .then(function(data) {
+                                    vm.users = data;
+                                });
+                        })
+                    .catch(function(err) {
+                        console.log("Error happened when fetching data: ", err);
+                    });
+            },
+            followUser(id) {
+                let url = "https://localhost:44300/api/User/" + id;
+                console.log(url);
+                fetch(url)
+                    .then(
+                        function(response) {
+                            if (response.status !== 200) {
+                                console.log("The User Could be found");
+                                return;
+                            }
+                            response.json()
+                                .then(function (userToSubscribeTo) {
+                                    let currentUser = store.user;
+                                    userToSubscribeTo.put("subscriberIds", currentUser.userId);
+                                });
+                        })
+                    .catch(function(err) {
+                        console.log("Error happened when fetching data: ", err);
+                    });
+            }
+        },
+        mounted() {
+            this.$nextTick(() => {
+                this.fetchUsers();
+            });
+        }
+    });
+</script>
