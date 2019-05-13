@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using SocialNetwork.Server.Model;
+using SocialNetwork.Model;
 
-namespace SocialNetwork.Server.Services
+namespace SocialNetwork.Services
 {
     public class PostServices
     {

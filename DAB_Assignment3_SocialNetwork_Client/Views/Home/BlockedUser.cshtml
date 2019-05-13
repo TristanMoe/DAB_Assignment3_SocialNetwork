@@ -16,7 +16,9 @@
     </form>
 </div>
 <hr />
-<div id="vueBlockedUsers">
+<div id="vueBlockedUsers" style="font-size: x-large">
+    <h3>Currently blocked</h3>
+    <br/>
     <ul>
         <li v-for="blockeduser in blockedusers">{{blockeduser.name}}, {{blockeduser.email}}</li>
     </ul>

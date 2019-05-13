@@ -13,14 +13,10 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="MongoDB.Driver" Version="2.8.0" />
     <PackageReference Include="vue" Version="2.5.17" />
     <PackageReference Include="Vue.Net.WebComponents" Version="0.1.0" />
     <PackageReference Include="Webpack" Version="4.0.0" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <ProjectReference Include="..\DAB_Assignment3_SocialNetwork\SocialNetwork.Server.csproj" />
   </ItemGroup>
 
 
