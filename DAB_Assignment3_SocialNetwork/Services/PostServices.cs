@@ -40,23 +40,23 @@ namespace SocialNetwork.Server.Services
             return post;
         }
 
-        [HttpPut]
-        public void UpdatePost(Post post,string id)
+        
+        public void UpdatePost(string id,Post post)
         {
             
-            var result = _posts.ReplaceOne(new BsonDocument("PostId", id), post, new UpdateOptions { IsUpsert = true});
+            var result = _posts.ReplaceOne(new BsonDocument("_id", id), post, new UpdateOptions { IsUpsert = true});
         }
 
-        [HttpPost]
+        
         public void InsertPost(Post post)
         {
             _posts.InsertOne(post);
         }
 
-        [HttpPost]
+        
         public void DeletePost(string Id)
         {
-            var filter = Builders<Post>.Filter.Eq("PostId", Id);
+            var filter = Builders<Post>.Filter.Eq("_id", Id);
             _posts.DeleteOne(filter);
         }
 
