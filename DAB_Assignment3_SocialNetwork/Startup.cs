@@ -34,7 +34,7 @@ namespace SocialNetwork.Server
             {
                 options.AddPolicy(OriginsAllowed,
                     builder => {
-                        builder.WithOrigins("https://localhost:44375/")
+                        builder.WithOrigins("https://localhost:/")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials();
