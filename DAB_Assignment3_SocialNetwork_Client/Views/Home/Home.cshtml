@@ -18,7 +18,7 @@
 
 
         <div class="form-label-group">
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+            <input type="password" id="inputPassword" v-model="inputPassword" class="form-control" placeholder="Password" required="">
             <label for="inputPassword">Password</label>
         </div>
 
@@ -37,13 +37,15 @@
     new Vue({
         el: '#app',
         data: {
-            inputEmail: ''
+            inputEmail: '',
+            inputPassword: ''
         },
         methods: {
             cookie: function (event) {
-                deleteCookies(); 
+                deleteCookies();
                 document.cookie = this.inputEmail;
-                //Create user should be here
+                //Create and save user
+                saveUser(inputEmail, inputPassword); 
             }
         }
     })
