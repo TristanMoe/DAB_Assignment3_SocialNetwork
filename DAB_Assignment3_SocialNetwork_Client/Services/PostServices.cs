@@ -8,7 +8,8 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using SocialNetwork.Model;
 
-namespace SocialNetwork.Services
+
+namespace DAB_Assignment3_SocialNetwork_Client.Services
 {
     public class PostServices
     {
@@ -23,11 +24,11 @@ namespace SocialNetwork.Services
         public List<Post> GetPublicPosts(List<string> ids)
         {
             var posts = new List<Post>();
-            var post=new Post();
+            var post = new Post();
             foreach (var id in ids)
             {
-                post=_posts.Find<Post>(p => p.PostId == id).FirstOrDefault();
-                if(post!=null)
+                post = _posts.Find<Post>(p => p.PostId == id).FirstOrDefault();
+                if (post != null)
                     posts.Add(post);
             }
 
@@ -36,28 +37,28 @@ namespace SocialNetwork.Services
 
         public Post GetPublicPost(string Id)
         {
-            var post= _posts.Find<Post>(p => p.PostId == Id).FirstOrDefault();
+            var post = _posts.Find<Post>(p => p.PostId == Id).FirstOrDefault();
             return post;
         }
 
-        
-        public void UpdatePost(string id,Post post)
+
+        public void UpdatePost(string id, Post post)
         {
-            
-            var result = _posts.ReplaceOne(new BsonDocument("_id", id), post, new UpdateOptions { IsUpsert = true});
+
+            var result = _posts.ReplaceOne(p => p.PostId == id, post);
         }
 
-        
+
         public void InsertPost(Post post)
         {
             _posts.InsertOne(post);
         }
 
-        
+
         public void DeletePost(string Id)
         {
-            var filter = Builders<Post>.Filter.Eq("_id", Id);
-            _posts.DeleteOne(filter);
+
+            _posts.DeleteOne(d => d.PostId == Id);
         }
 
 
@@ -96,4 +97,3 @@ namespace SocialNetwork.Services
 
 
 }
-

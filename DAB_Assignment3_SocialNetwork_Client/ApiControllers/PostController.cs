@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using SocialNetwork.Model;
+
 using SocialNetwork.Services;
 
-namespace SocialNetwork.Controllers
+namespace SocialNetwork.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -21,8 +22,8 @@ namespace SocialNetwork.Controllers
             _postServices = service;
         }
         // GET: api/Post
-        [HttpGet("{ids}")]
-        public ActionResult<List<Post>> GetPosts(List<string> ids)
+        [HttpGet]
+        public ActionResult<List<Post>> GetPosts([FromBody]List<string> ids)
         {
             return _postServices.GetPublicPosts(ids);
         }
@@ -41,18 +42,21 @@ namespace SocialNetwork.Controllers
 
         // POST: api/Post
 
-        [HttpPut("{id}")]       
-        public void UpdatePost(string id,[FromBody]Post post)
+        [HttpPut("{id}")]
+        public void UpdatePost(string id, [FromBody]Post post)
         {
-           
-            _postServices.UpdatePost(id,post);
-            
+            var getPost = _postServices.GetPublicPost(id);
+            post.PostId = getPost.PostId;
+            if (getPost == null)
+                return;
+            _postServices.UpdatePost(id, post);
+
         }
 
         // PUT: api/Post/5
 
-        
-        [HttpPost(Name="Create")]      
+
+        [HttpPost(Name = "Create")]
         public void Create([FromBody]Post post)
         {
             _postServices.InsertPost(post);
