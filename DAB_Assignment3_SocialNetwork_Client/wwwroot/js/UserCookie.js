@@ -26,16 +26,17 @@ function deleteCookies() {
 }
 
 function saveUser(inputEmail, inputPassword) {
-    fetch('https://localhost:44375/api/User/', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ Email: inputEmail, Password: inputPassword}),
-        })
+    fetch('https://localhost:44375/api/User/',
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ Email: inputEmail, Password: inputPassword })
+            })
         .then(response => response.json()) // response.json() returns a promise
         .then((response) => {
-            user = response; 
+            user = response;
             console.log("You saved this item", response); //returns the new item along with its ID
-        })
+        });
 }
