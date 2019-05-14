@@ -36,7 +36,7 @@ vm2 = new Vue({
     },
     methods: {
         GetBlockedUsers() {
-            fetch('.api/User')
+            fetch('api/User')
                 .then(function (response) {
                     if (response.status !== 200) {
                         console.log('Error detected. Status Code: ' + response.status);

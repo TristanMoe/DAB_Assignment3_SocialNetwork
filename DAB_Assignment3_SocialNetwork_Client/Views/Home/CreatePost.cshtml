@@ -3,8 +3,8 @@
     ViewData["Title"] = "CreatePost";
 }
 
-<div class="border rounded row">
-    <h2 class="createPost col-md-12">Create Post</h2>
+<div class="border rounded row" id="appPost">
+    <h2 class="col-md-12">Create Post</h2>
     <div class="col-md-2">
         <img class="logo" src="/Images/icons8-administrator-male-52.png" width="50" height="50"/>
     </div>
@@ -14,10 +14,10 @@
 
 <script>
     new Vue({
-        el: '#createPost',
+        el: '#appPost',
         data: {
             user: applicationState.data.user,
-            inputText: 'What\'s on your mind, ' + user 
+            inputText: 'What\'s on your mind, ' + this.user.firstName
             }
     });
 </script>
