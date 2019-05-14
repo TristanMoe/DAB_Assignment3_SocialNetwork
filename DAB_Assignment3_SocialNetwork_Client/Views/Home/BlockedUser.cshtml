@@ -19,11 +19,66 @@
 <div id="vueBlockedUsers" style="font-size: x-large">
     <h3>Currently blocked</h3>
     <br/>
-    <ul>
+    @*<ul>
         <li v-for="blockeduser in blockedusers">{{blockeduser.name}}, {{blockeduser.email}}</li>
-    </ul>
+    </ul>*@
+    <dl id="vueBlocked" v-for="blockeduser in blockedusers">
+        <dt>{{blockeduser.firstName}} {{blockeduser.lastName}} {{blockeduser.email}}</dt>
+    </dl>
 </div>
+<script>
+    var vm1 = new Vue({
+        el: '#vueBlockUser',
+        data: {
+            email: "",
+        },
+        methods: {
+            BlockUser() {
+                let email = this.email;
+                fetch('api/BlockedUsers/', {
+                    method: 'POST',
+                    body: JSON.stringify(email),
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    })
+                }).then(function(response) {
+                    if (response.status !== 201) {
+                        alert('An error was detected. Status code' + response.status);
+                        return;
+                    }
+                    response.json().then(function() {
+                            alert('Received request to block user');
+                        })
+                        .catch(function(err) {
+                            alert('Error' + err);
+                        });
+                })
+            }
+        }
+    });
 
-@section Scripts{
-    <script src="~/js/blockeduser-vue.js" asp-append-version="true"></script>
-}
+    var vm2 = new Vue({
+        el: '#vueBlockedUsers',
+        data: {
+            blockedusers: []
+        },
+        methods: {
+            GetBlockedUsers() {
+                let url = sharedStateData.apiUrl + "User/";
+                fetch(url)
+                    .then(function (response) {
+                        if (response.status !== 200) {
+                            console.log('Error detected. Status Code: ' + response.status);
+                            return;
+                        }
+                        response.json().then(function (blockedusers) {
+                                vm2.blockedusers = blockedusers;
+                            })
+                            .catch(function (error) {
+                                console.log('Fetch error :-S', error);
+                            });
+                    });
+            }
+        }
+    });
+</script>

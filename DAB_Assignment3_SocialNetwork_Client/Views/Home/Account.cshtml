@@ -8,22 +8,48 @@
     <hr />
     <div class="row">
         <div class="col-2">Email:</div>
-        <div class="col-10">"{{data.email}}"</div>
+        <div class="col-10">"{{user.email}}"</div>
     </div>
     <div class="row">
-        <div class="col-2">Name:</div>
-        <div class="col-10">"{{data.name}}"</div>
+        <div class="col-2">Firstname:</div>
+        <div class="col-10">"{{user.firstName}}"</div>
+    </div>
+    <div class="row">
+        <div class="col-2">Lastname:</div>
+        <div class="col-10">"{{user.lastName}}"</div>
     </div>
     <div class="row">
         <div class="col-2">Gender:</div>
-        <div class="col-10">"{{data.gender}}"</div>
+        <div class="col-10">"{{user.gender}}"</div>
     </div>
     <div class="row">
         <div class="col-2">Age:</div>
-        <div class="col-10">"{{data.age}}"</div>
+        <div class="col-10">"{{user.age}}"</div>
     </div>
 </div>
-
-@section Scripts{
-    <script src="~/js/account-vue.js" asp-append-version="true"></script>
-}
+<script>
+    var vm = new Vue({
+        el: '#vueAccount',
+        data: {
+            user: ""
+        },
+        methods: {
+            GetAccountInformation() {
+                let url = sharedStateData.apiUrl + "User/";
+                fetch(url)
+                    .then(function (response) {
+                        if (response.status !== 200) {
+                            console.log('Error detected. Status Code: ' + response.status);
+                            return;
+                        }
+                        response.json().then(function (data) {
+                            vm.user = data;
+                        })
+                            .catch(function (error) {
+                                console.log('Fetch error :-S', error);
+                            });
+                    });
+            }
+        }
+    });
+</script>
