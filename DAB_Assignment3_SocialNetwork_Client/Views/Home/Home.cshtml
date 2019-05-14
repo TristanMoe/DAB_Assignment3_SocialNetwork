@@ -4,48 +4,53 @@
 }
 
 <div id="app">
-    <form class="form-signin">
-        <div class="text-center mb-4">
-            <img class="mb-4" src="Images/logo.png" alt="" width="200" height="200">
-            <h1 class="h3 mb-3 font-weight-normal">Welcome to GameHub</h1>
-            <p>Please Login to access your feed</p>
-        </div>
+    <div class="text-center mb-4">
+        <img class="mb-4" src="Images/logo.png" alt="" width="200" height="200">
+        <h1 class="h3 mb-3 font-weight-normal">Welcome to GameHub</h1>
+        <p>Please Login to access your feed</p>
+    </div>
 
-        <div class="form-label-group">
-            <input type="email" id="inputEmail" v-model="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-            <label for="inputEmail">Email address</label>
-        </div>
+    <div class="form-label-group">
+        <input type="email" id="inputEmail" v-model="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+        <label for="inputEmail">Email address</label>
+    </div>
 
 
-        <div class="form-label-group">
-            <input type="password" id="inputPassword" v-model="inputPassword" class="form-control" placeholder="Password" required="">
-            <label for="inputPassword">Password</label>
-        </div>
+    <div class="form-label-group">
+        <input type="password" id="inputPassword" v-model="inputPassword" class="form-control" placeholder="Password" required="">
+        <label for="inputPassword">Password</label>
+    </div>
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
-        <button v-on:click="cookie" class="btn btn-lg btn-primary btn-block" type="submit" asp-controller="Home" asp-action="Feed">Sign in</button>
-            <p class="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
-    </form>
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" value="remember-me"> Remember me
+        </label>
+    </div>
+    <button v-on:click="homeLogin()" class="btn btn-lg btn-primary btn-block" asp-controller="Home" asp-action="Feed">Sign in</button>
+        <p class="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
 </div>
 
 
 <script>
-    new Vue({
+    var homeVm = new Vue({
         el: '#app',
         data: {
             inputEmail: '',
-            inputPassword: ''
+            inputPassword: '',
+            sharedState: applicationState
         },
         methods: {
             cookie: function (event) {
                 deleteCookies();
-                document.cookie = this.inputEmail;
+                document.cookie = this.inputEmail + ';' + this.inputPassword;
                 //Create and save user
-                saveUser(inputEmail, inputPassword); 
+                saveUser(inputEmail, inputPassword);
+            },
+            homeLogin() {
+                if (inputEmail === '' || inputPassword === '')
+                    return;
+                login(this.inputEmail, this.inputPassword).then(()=>
+                    window.location.href = 'https://localhost:44375/Home/Feed');
             }
         }
     })
