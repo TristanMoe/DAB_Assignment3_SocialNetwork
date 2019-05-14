@@ -27,7 +27,7 @@ namespace SocialNetwork.Controllers
         }
 
         // GET: api/User/5
-        [HttpGet("{email, password}", Name = "GetUserByCredentials")]
+        [HttpGet("ByCredentials/{email}/{password}", Name = "GetUserByCredentials")]
         public ActionResult<User> Get(string email,string password)
         {
             return _userService.Get(email,password);

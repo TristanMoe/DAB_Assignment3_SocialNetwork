@@ -3,22 +3,55 @@
     ViewData["Title"] = "CreatePost";
 }
 
-<div class="border rounded row">
-    <h2 class="createPost col-md-12">Create Post</h2>
+<div class="border rounded row" id="appPost">
+    <h2 class="col-md-12">Create Post</h2>
     <div class="col-md-2">
         <img class="logo" src="/Images/icons8-administrator-male-52.png" width="50" height="50"/>
     </div>
-    <input class="col-md-10" v-model="inputText" />
-    <button class="btn btn-primary btn-lg shareBtn" type="submit">Share</button>
+    <input class="col-md-10" v-model="inputText"/>
+    <!-- Dropdown menu-->
+    <button class="btn btn-primary dropdown-toggle col-sm-2 dpMenu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Share
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-item" href="#">Public Post</div>
+        <div class="dropdown-item"  href="#" v-for="groupFeed in groupFeeds">
+            {{groupFeed.GroupFeedName}}
+        </div>
+    </div>
 </div>
 
 <script>
     new Vue({
-        el: '#createPost',
+        el: '#appPost',
         data: {
             user: applicationState.data.user,
-            inputText: 'What\'s on your mind, ' + user 
-            }
+            inputText: 'What\'s on your mind, ' + this.user.firstName,
+            groupFeeds: []
+
+        },
+        beforeMount() {
+            fetch('https://localhost:44375/api/GroupFeed/',
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(user.feed.groupFeedIds)
+                }).then(function (response) {
+                    if (response.status !== 200) {
+                        console.log('Looks like there was a problem. Status code' + response.status); 
+                    };
+                    response.json().then(function (feeds) {
+                        if (feeds == 0)
+                            this.groupFeeds = 0; 
+                        this.groupFeeds = feeds; 
+                    });
+            });
+        },
+        methods: {
+
+        }
     });
 </script>
 
