@@ -32,5 +32,24 @@ namespace SocialNetwork.Services
             return groupFeeds;
         }
 
+        public GroupFeed GetGroupFeed(string id)
+        {
+            return _groupFeeds.Find(g => g.GroupFeedId == id).FirstOrDefault();
+        }
+
+        public void InsertGroupFeed(GroupFeed feed)
+        {
+            _groupFeeds.InsertOne(feed);
+        }
+
+        public void PutGroupFeed(string id, GroupFeed feed)
+        {
+            var feeder= _groupFeeds.ReplaceOne(p => p.GroupFeedId == id, feed);
+        }
+
+        public void DeleteGroupFeed(string id)
+        {
+            _groupFeeds.DeleteOne(g=>g.GroupFeedId==id);
+        }
     }
 }
