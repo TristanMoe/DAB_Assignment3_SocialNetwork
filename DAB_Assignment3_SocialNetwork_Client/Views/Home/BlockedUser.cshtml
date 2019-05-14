@@ -6,61 +6,72 @@
 <h1>Blocked users</h1>
 <hr />
 <div id="vueBlockUser">
-    <form class="form-signin">
-        <label for="inputEmail">Email address to block:</label>
-        <div class="form-label-group">
-            <input type="email" id="inputEmail" v-model="email" class="form-control" placeholder="Email address" required="" autofocus="">
+    <label for="inputEmail">Email address to block:</label>
+    <div style="width: 30%">
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
             <br />
-            <button v-on:click="BlockUser" class="btn btn-lg btn-primary btn-block" type="submit">Block</button>
-        </div>
-    </form>
+            <button v-on:click="getUserToBlock(inputEmail); blockUser();" class="btn btn-lg btn-primary btn-block" type="submit">Block</button>
+    </div>
 </div>
 <hr />
 <div id="vueBlockedUsers" style="font-size: x-large">
     <h3>Currently blocked</h3>
-    <br/>
+    <br />
     @*<ul>
-        <li v-for="blockeduser in blockedusers">{{blockeduser.name}}, {{blockeduser.email}}</li>
-    </ul>*@
-    <dl id="vueBlocked" v-for="blockeduser in blockedusers">
-        <dt>{{blockeduser.firstName}} {{blockeduser.lastName}} {{blockeduser.email}}</dt>
+            <li v-for="blockeduser in blockedusers">{{blockeduser.name}}, {{blockeduser.email}}</li>
+        </ul>*@
+    <dl id="vueBlocked" v-for="blockedSubscriber in blockedSubscribers">
+        <dt>{{blockedSubscriber.firstName}} {{blockedSubscriber.lastName}} {{blockedSubscriber.email}}</dt>
     </dl>
 </div>
 <script>
     var vm1 = new Vue({
         el: '#vueBlockUser',
         data: {
-            email: "",
+            user: "",
+            sharedStateData: applicationState.data
         },
-        methods: {
-            BlockUser() {
-                let email = this.email;
-                fetch('api/BlockedUsers/', {
-                    method: 'POST',
-                    body: JSON.stringify(email),
-                    headers: new Headers({
-                        'Content-Type': 'application/json'
-                    })
-                }).then(function(response) {
+          methods: {
+            getUserToBlock(id) {
+                let url = sharedStateData.apiUrl + "User/" + id;
+                    fetch(url)
+                        .then(function (response) {
+                            if (response.status !== 200) {
+                                console.log('Error detected. Status Code: ' + response.status);
+                                return;
+                            }
+                            response.json().then(function (userToBlock) {
+                                    vm1.user = userToBlock;
+                                })
+                                .catch(function (error) {
+                                    console.log('Fetch error :-S', error);
+                                });
+                        });
+                    },
+            blockUser() {
+                let url = sharedStateData.apiUrl + "User/";
+                fetch(url)
+                    .then(function(response) {
                     if (response.status !== 201) {
                         alert('An error was detected. Status code' + response.status);
                         return;
                     }
-                    response.json().then(function() {
-                            alert('Received request to block user');
+                    response.json().then(function(user) {
+                        alert('Received request to block user');
+                        sharedStateData.currentUser.userId.put('blockedSubscriberIds', user.userId);
                         })
                         .catch(function(err) {
                             alert('Error' + err);
                         });
-                })
+                });
             }
         }
     });
-
     var vm2 = new Vue({
         el: '#vueBlockedUsers',
         data: {
-            blockedusers: []
+            blockedSubscribers: [],
+            sharedStateData: applicationState.data
         },
         methods: {
             GetBlockedUsers() {
@@ -71,9 +82,9 @@
                             console.log('Error detected. Status Code: ' + response.status);
                             return;
                         }
-                        response.json().then(function (blockedusers) {
-                                vm2.blockedusers = blockedusers;
-                            })
+                        response.json().then(function (blockedSubscriberIds) {
+                            vm2.blockedSubscribers = blockedSubscriberIds;
+                        })
                             .catch(function (error) {
                                 console.log('Fetch error :-S', error);
                             });
