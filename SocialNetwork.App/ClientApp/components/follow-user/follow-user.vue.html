@@ -1,0 +1,20 @@
+<template>
+    <div>
+        <h1>Weather forecast</h1>
+
+        <p>This component demonstrates fetching data from the server.</p>
+
+        <table v-if="forecasts.length" class="table">
+            <dl id="musicianList" v-for="user in users">
+                <dt>{{user.firstName}} {{user.lastName}}</dt>
+                <dd>
+                    <input type="button" v-on:click="followUser(user.userId)" value="Subscribe"/>
+                </dd>
+            </dl>
+        </table>
+
+        <p v-else><em>Loading...</em></p>
+    </div>
+</template>
+
+<script src="./follow-user.ts"></script>
