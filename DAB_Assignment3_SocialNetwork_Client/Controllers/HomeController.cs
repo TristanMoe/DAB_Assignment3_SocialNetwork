@@ -12,37 +12,65 @@ namespace DAB_Assignment3_SocialNetwork_Client.Controllers
     {
         public IActionResult Home()
         {
-            return View(); 
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView();
+            }
+            return View();
         }
 
         public IActionResult Feed()
         {
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView();
+            }
             return View();
         }
 
         public IActionResult Wall()
         {
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView();
+            }
             return View();
         }
 
         public IActionResult CreatePost()
         {
-            return View(); 
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView();
+            }
+            return View();
         }
 
         public IActionResult FollowUser()
         {
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView();
+            }
             return View();
         }
 
         public IActionResult BlockedUser()
         {
-            return View(); 
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView();
+            }
+            return View();
         }
 
         public IActionResult Account()
         {
-            return View(); 
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView();
+            }
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

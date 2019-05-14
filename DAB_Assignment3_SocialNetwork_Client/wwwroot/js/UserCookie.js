@@ -4,8 +4,8 @@
         apiUrl: "https://localhost:44375/api/"
     },
     setUser(newUser) {
-        console.log("user got set to", newUser);
         this.user = newUser;
+        console.log("user got set to", this.user);
     }
 }
 
