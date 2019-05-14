@@ -47,22 +47,24 @@
 
 <!-- Her skal der fetches!-->
 <script>
-    new Vue({
+    var vm = new Vue({
         el: '#wall',
         data: {
             user: applicationState.data.user,
             posts: [],
             commentUser: []
         },
-        mounted() {
+        beforeMount() {
             //Get all posts for user
-            fetch('https://localhost:44375/api/Post/' + user.userId).then(function(response) {
+            //vm.user = applicationState.data.user; 
+            fetch('https://localhost:44375/api/Post/' + this.user.userId).then(function(response) {
                 if (response.status !== 200) {
                     console.log('Looks like there was a problem. Status Code: ' + response.status);
                 };
                 //Build HTML 
                 //Dette virker 100% ikke 
-                response.json().then(function(posts) {
+                response.json().then(function (posts) {
+                    console.log('Successful fetch ');
                     this.posts = posts;
                     for (i = 0; i < posts.length; i++) {
                         for (j = 0; j < posts[i].comments.length; i++) {

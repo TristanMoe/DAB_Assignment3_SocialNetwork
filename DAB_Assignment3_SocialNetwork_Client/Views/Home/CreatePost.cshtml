@@ -42,7 +42,9 @@
                     if (response.status !== 200) {
                         console.log('Looks like there was a problem. Status code' + response.status); 
                     };
-                    response.json().then(function(feeds) {
+                    response.json().then(function (feeds) {
+                        if (feeds == 0)
+                            this.groupFeeds = 0; 
                         this.groupFeeds = feeds; 
                     });
             });
