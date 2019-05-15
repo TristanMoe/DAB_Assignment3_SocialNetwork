@@ -48,7 +48,7 @@ namespace SocialNetwork.Controllers
 
         // PUT: api/User/5
         [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string id, User userInput)
+        public IActionResult Update(string id, [FromBody] User userInput)
         {
             var userToUpdate = _userService.Get(id);
             if (userToUpdate == null)
