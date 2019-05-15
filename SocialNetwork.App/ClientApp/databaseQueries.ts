@@ -59,6 +59,17 @@ export class DataBaseQuery {
             .catch(error => console.log("Error while updating user: ", error));
     }
 
+    blockUser(userToBlock: IUser, userToBeBlocked: IUser) {
+        userToBlock.blockedSubscriberIds.push(userToBeBlocked.userId);
+        let updateUrl = ApplicationState.apiUrl + "User/" + userToBlock.userId;
+        return fetch(updateUrl,
+                {
+                    method: "PUT",
+                    body: JSON.stringify(userToBlock),
+                    headers: new Headers({ "Content-Type": "application/json" })
+                })
+            .catch(error => console.log("error while fetching user", error));
+    }
 
     getAllUsers() {
         let url = ApplicationState.apiUrl + "User/";
@@ -70,6 +81,14 @@ export class DataBaseQuery {
 
     getUserById(id: string) {
         let url = `${ApplicationState.apiUrl}User/${id}`;
+        console.log(`Fetching: ${url} ...`);
+        return fetch(url)
+            .then((response) => response.json())
+            .catch(err => console.log("Error while fetching user:", err));
+    }
+
+    getUserByEmail(email: string) {
+        let url = `${ApplicationState.apiUrl}User/ByEmail/${email}`;
         console.log(`Fetching: ${url} ...`);
         return fetch(url)
             .then((response) => response.json())

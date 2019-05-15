@@ -42,6 +42,7 @@ namespace SocialNetwork.Services
                 user.Email == email && user.Password == password).FirstOrDefault();
         }
 
+
         public User GetUser(string email)
         {
             return _usersCollection.Find<User>(user =>

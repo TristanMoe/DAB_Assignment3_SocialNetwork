@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\components\block-user.ts" />
     <None Remove="ClientApp\store.ts" />
   </ItemGroup>
 
@@ -28,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\block-user\block-user.ts" />
     <TypeScriptCompile Include="ClientApp\store.ts" />
   </ItemGroup>
 
