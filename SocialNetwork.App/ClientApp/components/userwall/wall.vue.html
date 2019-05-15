@@ -3,16 +3,23 @@
         <div class="media text-muted pt-3">
             <img src="/Images/icons8-administrator-male-52.png" width="40" height="40" />
             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-
+                <div v-for="post in posts">
+                    <strong class="d-block text-gray-dark">{{currentUser.firstName}} {{currentUser.lastName}}</strong>
+                    {{post.postContent}}, {{post.postTimeStamp}}
+                    <div v-for="comment in comments">
+                        <img src="/Images/icons8-administrator-male-52.png" width="15" height="15" />
+                        {{comment}}
+                    </div>
+                    <div class="row commentBtn rounded">
+                        <input class="col-10 rounded"/>
+                        <button class="col-2 rounded" v-on:click="addComment()"></button>
+                    </div>
+                </div>
             </p>
         </div>
     </div>
 </template>
 
-<script>
+<script src="./wall.tsx"></script>
 
-</script>
-
-<style>
-
-</style>
+<style src="./wall.css"></style>
