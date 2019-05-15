@@ -12,12 +12,11 @@ export default class Home extends Vue {
             return;
         this.databaseQuery.login(this.inputEmail, this.inputPassword)
             .then((userToLogin) => {
-                this.$store.commit(
+                this.$store.commit('setUser',
                     {
-                        type: 'setUser',
-                        newUser: userToLogin
+                        newUser: userToLogin,
                     });
-                window.location.href = 'https://localhost:44375/Home/Feed';
+                this.$router.push('follow-user');
             })
             .catch(err => `Error happened when logging in: ${err}`);
     };

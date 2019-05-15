@@ -6,6 +6,8 @@ import * as dbq from "../../databaseQueries";
 export default class FetchDataComponent extends Vue {
     databaseQuery: dbq.DataBaseQuery = new dbq.DataBaseQuery();
     users: dbq.IUser[] = new Array<dbq.IUser>();
+    currentUser: dbq.IUser = this.$store.state.user;
+
     fetchUsers() {
         this.databaseQuery.getAllUsers().then((fetchedUsers : dbq.IUser[])=> this.users = fetchedUsers);
     }
@@ -21,9 +23,14 @@ export default class FetchDataComponent extends Vue {
                         return;
                     }
                     response.json()
-                        .then(jsonData => self.databaseQuery.subscribeUser(jsonData,self.$store.state.user));
+                        .then(jsonData => self.databaseQuery.subscribeUser(jsonData as dbq.IUser,self.$store.state.user as dbq.IUser));
                 })
             .catch(err => console.log("Error happened when fetching data: ", err));
+    }
+    currentUserIsSubscribedTo(subTo: dbq.IUser) {
+        if (this.currentUser.subscriptionIds != null)
+            return this.currentUser.subscriptionIds.indexOf(subTo.userId) > -1;
+        return false;
     }
     mounted() {
         this.$nextTick(() => {

@@ -21,17 +21,13 @@ export interface IPost {
 }
 
 export class ApplicationState {
-    static user: IUser;
     static apiUrl: string = 'http://localhost:56490/api/';
-    static setUser(newUser: IUser) {
-        this.user = newUser;
-        console.log("user got set to", this.user);
-    }
+    static url: string = 'http://localhost:56490/';
 }
 
 export class DataBaseQuery {
     saveUser(inputEmail: string, inputPassword: string) {
-        fetch(ApplicationState.apiUrl + 'User/',
+        return fetch(ApplicationState.apiUrl + 'User/',
             {
                 method: "POST",
                 headers: {
@@ -39,23 +35,29 @@ export class DataBaseQuery {
                 },
                 body: JSON.stringify({ Email: inputEmail, Password: inputPassword })
             })
-            .then(response => response.json()) // response.json() returns a promise
-            .then((response) => {
-                ApplicationState.setUser(response);
-                console.log("You saved this item", response); //returns the new item along with its ID
-            });
+            .then(response => response.json()) // response.json() returns a promise});
     }
 
-    subscribeUser(userToSubscribeTo: IUser, userToSubscribe : IUser) {
+    subscribeUser(userToSubscribeTo: IUser, userToSubscribe: IUser) {
+        if (userToSubscribe.subscriptionIds == null)
+            userToSubscribe.subscriptionIds = new Array<string>();
         userToSubscribe.subscriptionIds.push(userToSubscribeTo.userId);
+        if (userToSubscribeTo.subscriberIds == null)
+            userToSubscribeTo.subscriberIds = new Array<string>();
         userToSubscribeTo.subscriberIds.push(userToSubscribe.userId);
-        let updateUrl = ApplicationState.apiUrl + "User/" + userToSubscribeTo.userId;
-        return fetch(updateUrl,
+        let subscribeToUpdateUrl = ApplicationState.apiUrl + "User/" + userToSubscribeTo.userId;
+        let subscriberUpdateUrl = ApplicationState.apiUrl + "User/" + userToSubscribe.userId;
+        return fetch(subscribeToUpdateUrl,
             {
                 method: "PUT",
                 body: JSON.stringify(userToSubscribeTo),
                 headers: new Headers({ "Content-Type": "application/json" })
-            })
+            }).then(() => fetch(subscriberUpdateUrl,
+                {
+                    method: "PUT",
+                    body: JSON.stringify(userToSubscribe),
+                    headers: new Headers({ "Content-Type": "application/json" })
+                }))
             .catch(error => console.log("Error while updating user: ", error));
     }
 

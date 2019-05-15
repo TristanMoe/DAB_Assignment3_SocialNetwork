@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -48,7 +49,7 @@ namespace SocialNetwork.Services
                 user.Email == email).FirstOrDefault();
         }
 
-        public User Create(User user)
+        public User Create([FromBody] User user)
         {
             var userExists = _usersCollection.Find(u => u.Email == user.Email).FirstOrDefault();
             if (userExists != null)
@@ -57,7 +58,7 @@ namespace SocialNetwork.Services
             return user;
         }
 
-        public void Update(string id, User userIn)
+        public void Update(string id,[FromBody] User userIn)
         {
             _usersCollection.ReplaceOne(user => user.UserId == id, userIn);
         }
