@@ -45,13 +45,19 @@ export class DataBaseQuery {
         if (userToSubscribeTo.subscriberIds == null)
             userToSubscribeTo.subscriberIds = new Array<string>();
         userToSubscribeTo.subscriberIds.push(userToSubscribe.userId);
-        let updateUrl = ApplicationState.apiUrl + "User/" + userToSubscribeTo.userId;
-        return fetch(updateUrl,
+        let subscribeToUpdateUrl = ApplicationState.apiUrl + "User/" + userToSubscribeTo.userId;
+        let subscriberUpdateUrl = ApplicationState.apiUrl + "User/" + userToSubscribe.userId;
+        return fetch(subscribeToUpdateUrl,
             {
                 method: "PUT",
                 body: JSON.stringify(userToSubscribeTo),
                 headers: new Headers({ "Content-Type": "application/json" })
-            })
+            }).then(() => fetch(subscriberUpdateUrl,
+                {
+                    method: "PUT",
+                    body: JSON.stringify(userToSubscribe),
+                    headers: new Headers({ "Content-Type": "application/json" })
+                }))
             .catch(error => console.log("Error while updating user: ", error));
     }
 
