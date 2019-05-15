@@ -12,9 +12,11 @@ export default class BlockUser extends Vue {
         if (this.blockEmail === '' || this.blockEmail === '')
             return;
         this.databaseQuery.getUserByEmail(this.blockEmail)
-            .then((fetcheduser: dbq.IUser) => this.userToBeBlocked = fetcheduser);
+            .then((fetcheduser: IUser) => this.userToBeBlocked = fetcheduser);
     }
     blockUser() {
+        this.$store.state.user.blockedSubscriberIds = new Array();
+        console.log("wtf is going on in here");
         this.databaseQuery.blockUser(this.$store.state.user, this.userToBeBlocked);
     }
     block() {

@@ -21,8 +21,8 @@ export interface IPost {
 }
 
 export class ApplicationState {
-    static apiUrl: string = 'http://localhost:56490/api/';
-    static url: string = 'http://localhost:56490/';
+    static apiUrl: string = 'http://localhost:52176/api/';
+    static url: string = 'http://localhost:52176/';
 }
 
 export class DataBaseQuery {

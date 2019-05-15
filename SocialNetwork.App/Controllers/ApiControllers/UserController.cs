@@ -38,6 +38,11 @@ namespace SocialNetwork.Controllers
             return _userService.Get(id);
         }
 
+        [HttpGet("{email}", Name = "GetUserByEmail")]
+        public User GetUser(string email)
+        {
+            return _userService.GetUser(email);
+        }
 
         // POST: api/User
         [HttpPost]
