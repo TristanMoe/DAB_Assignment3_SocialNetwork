@@ -9,7 +9,7 @@ import IUser = dbq.IUser;
 export default class AccountComponent extends Vue{
 
     
-        user: IUser = dbq.ApplicationState.user
+        user: IUser = this.$store.state.user;
        
 
 }
