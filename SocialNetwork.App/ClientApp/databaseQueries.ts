@@ -22,7 +22,7 @@ export interface IPost {
 
 export class ApplicationState {
     static user: IUser;
-    static apiUrl: string = "https://localhost:44375/api/";
+    static apiUrl: string = 'http://localhost:56490/api/';
     static setUser(newUser: IUser) {
         this.user = newUser;
         console.log("user got set to", this.user);
@@ -31,7 +31,7 @@ export class ApplicationState {
 
 export class DataBaseQuery {
     saveUser(inputEmail: string, inputPassword: string) {
-        fetch('https://localhost:44375/api/User/',
+        fetch(ApplicationState.apiUrl + 'User/',
             {
                 method: "POST",
                 headers: {
@@ -46,11 +46,11 @@ export class DataBaseQuery {
             });
     }
 
-    subscribeUser(userToSubscribeTo: IUser) {
-        ApplicationState.user.subscriptionIds.push(userToSubscribeTo.userId);
-        userToSubscribeTo.subscriberIds.push(ApplicationState.user.userId);
+    subscribeUser(userToSubscribeTo: IUser, userToSubscribe : IUser) {
+        userToSubscribe.subscriptionIds.push(userToSubscribeTo.userId);
+        userToSubscribeTo.subscriberIds.push(userToSubscribe.userId);
         let updateUrl = ApplicationState.apiUrl + "User/" + userToSubscribeTo.userId;
-        fetch(updateUrl,
+        return fetch(updateUrl,
             {
                 method: "PUT",
                 body: JSON.stringify(userToSubscribeTo),
@@ -100,9 +100,7 @@ export class DataBaseQuery {
     }
 
     login(email: string, password: string) {
-        return this.getUserByCredentials(email, password)
-            .then((userToLogin) => ApplicationState.setUser(userToLogin))
-            .catch(err => `Error happened when logging in: ${err}`);
+        return this.getUserByCredentials(email, password);
     }
 }
 

@@ -1,6 +1,5 @@
 ﻿import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-
 import * as dbq from "../../databaseQueries";
 
 @Component
@@ -22,7 +21,7 @@ export default class FetchDataComponent extends Vue {
                         return;
                     }
                     response.json()
-                        .then(jsonData => self.databaseQuery.subscribeUser(jsonData));
+                        .then(jsonData => self.databaseQuery.subscribeUser(jsonData,self.$store.state.user));
                 })
             .catch(err => console.log("Error happened when fetching data: ", err));
     }
