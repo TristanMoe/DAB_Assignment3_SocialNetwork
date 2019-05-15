@@ -13,7 +13,6 @@ using SocialNetwork.Services;
 namespace SocialNetwork.Server.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class PostController : ControllerBase
     {
         private PostServices _postServices;
@@ -24,7 +23,7 @@ namespace SocialNetwork.Server.Controllers
         }
         // GET: api/Post
         [HttpGet]
-        public ActionResult<List<Post>> GetPosts([FromBody]List<string> ids)
+        public List<Post> GetPosts([FromBody]List<string> ids)
         {
             return _postServices.GetPublicPosts(ids);
         }
@@ -32,11 +31,11 @@ namespace SocialNetwork.Server.Controllers
 
         // GET: api/Post/5
         [HttpGet("{id}", Name = "Get")]
-        public ActionResult<Post> GetPost(string id)
+        public Post GetPost(string id)
         {
             var post = _postServices.GetPublicPost(id);
             if (post == null)
-                return BadRequest();
+                return default;
             return post;
 
         }
@@ -48,8 +47,6 @@ namespace SocialNetwork.Server.Controllers
         {
             var getPost = _postServices.GetPublicPost(id);
             post.PostId = getPost.PostId;
-            if (getPost == null)
-                return;
             _postServices.UpdatePost(id, post);
 
         }

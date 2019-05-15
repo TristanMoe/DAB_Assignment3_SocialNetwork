@@ -10,7 +10,6 @@ using SocialNetwork.Services;
 namespace SocialNetwork.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class UserFeedController : ControllerBase
     {
         private readonly UserFeedService _userFeedService;
@@ -21,13 +20,13 @@ namespace SocialNetwork.Controllers
         }
         // GET: api/User
         [HttpGet]
-        public ActionResult<List<UserFeed>> Get()
+        public List<UserFeed> Get()
         {
             return _userFeedService.Get();
         }
 
         [HttpGet("{id}", Name = "GetUserFeed")]
-        public ActionResult<UserFeed> Get(string id)
+        public UserFeed Get(string id)
         {
             return _userFeedService.Get(id);
         }
@@ -35,10 +34,9 @@ namespace SocialNetwork.Controllers
 
         // POST: api/User
         [HttpPost]
-        public ActionResult<UserFeed> Create(UserFeed userFeed)
+        public UserFeed Create(UserFeed userFeed)
         {
-            _userFeedService.Create(userFeed);
-            return CreatedAtRoute("GetUserById", new { id = userFeed.FeedId }, userFeed);
+            return _userFeedService.Create(userFeed);
         }
 
         // PUT: api/User/5

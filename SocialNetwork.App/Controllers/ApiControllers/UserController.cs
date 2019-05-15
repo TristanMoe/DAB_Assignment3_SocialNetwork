@@ -10,7 +10,6 @@ using SocialNetwork.Services;
 namespace SocialNetwork.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class UserController : ControllerBase
     {
         private readonly UserService _userService;
@@ -21,20 +20,20 @@ namespace SocialNetwork.Controllers
         }
         // GET: api/User
         [HttpGet]
-        public ActionResult<List<User>> Get()
+        public List<User> Get()
         {
             return _userService.Get();
         }
 
         // GET: api/User/5
         [HttpGet("ByCredentials/{email}/{password}", Name = "GetUserByCredentials")]
-        public ActionResult<User> Get(string email,string password)
+        public User Get(string email,string password)
         {
             return _userService.Get(email,password);
         }
 
         [HttpGet("{id}", Name = "GetUserById")]
-        public ActionResult<User> Get(string id)
+        public User Get(string id)
         {
             return _userService.Get(id);
         }
@@ -42,17 +41,9 @@ namespace SocialNetwork.Controllers
 
         // POST: api/User
         [HttpPost]
-        public ActionResult<User> Create(User user)
+        public User Create(User user)
         {
-            try
-            {
-                _userService.Create(user);
-                return CreatedAtRoute("GetUserById", new { id = user.UserId }, user);
-            }
-            catch (UserExistsException e)
-            {
-                return BadRequest(e.Message);
-            }
+            return _userService.Create(user);
         }
 
         // PUT: api/User/5
