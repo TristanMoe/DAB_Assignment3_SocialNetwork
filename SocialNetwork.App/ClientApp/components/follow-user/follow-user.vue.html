@@ -13,13 +13,18 @@
             </tr>
             </thead>
             <tbody>
-                <tr v-for="user in users">
-                    <td>{{user.firstName}}</td>
-                    <td>{{user.lastName}}</td>
-                    <td>
-                        <input type="button" v-on:click="followUser(user.userId)" value="Subscribe"/>
-                    </td>
-                </tr>
+            <tr v-for="user in users">
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>
+                    <div v-if="currentUserIsSubscribedTo(user)">
+                        <p>Already subscribed!</p>
+                    </div>
+                    <div v-else>
+                        <input type="button" v-on:click="followUser(user.userId)" value="Subscribe" />
+                    </div>
+                </td>
+            </tr>
             </tbody>
         </table>
 

@@ -23,6 +23,7 @@ namespace SocialNetwork.Model
         public string Feed { get; set; }
         public List<string> PublicPostIds { get; set; }
         public List<string> SubscriberIds { get; set; }
+        public List<string> SubscriptionIds { get; set; }
         public List<string> BlockedSubscriberIds { get; set; }
     }
 }
