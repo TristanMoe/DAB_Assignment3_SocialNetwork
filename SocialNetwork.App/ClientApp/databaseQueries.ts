@@ -1,5 +1,4 @@
-﻿
-export interface IUser {
+﻿export interface IUser {
     userId: string;
     firstName: string;
     lastName: string;
@@ -11,6 +10,14 @@ export interface IUser {
     subscriberIds: string[];
     subscriptionIds: string[];
     blockedSubscriberIds: string[];
+}
+
+export interface IPost {
+    postId: string; 
+    contentId: string; 
+    postTimeStamp: string;
+    comments: string[]; 
+    postContent: string; 
 }
 
 export class ApplicationState {
@@ -67,6 +74,21 @@ export class DataBaseQuery {
         return fetch(url)
             .then((response) => response.json())
             .catch(err => console.log("Error while fetching user:", err));
+    }
+
+    getPostsForUser(id: string[]) {
+        let url = `${ApplicationState.apiUrl}/Post/`;
+        console.log(`Fetching: ${url} ...`);
+        return fetch(url,
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(id),
+                })
+            .then((response) => response.json())
+            .catch(err => console.log("Error while fetching posts:", err));
     }
 
     getUserByCredentials(email: string, password: string) {

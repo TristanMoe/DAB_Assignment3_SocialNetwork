@@ -6,6 +6,7 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <AssemblyName>SocialNetwork.Client</AssemblyName>
     <RootNamespace>SocialNetwork_Client</RootNamespace>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
 
