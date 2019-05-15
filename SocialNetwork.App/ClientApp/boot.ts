@@ -2,6 +2,7 @@ import './css/site.css';
 import 'bootstrap';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import AppStore from './store';
 Vue.use(VueRouter);
 
 const routes = [
@@ -13,6 +14,7 @@ const routes = [
 
 new Vue({
     el: '#app-root',
+    store: AppStore,
     router: new VueRouter({ mode: 'history', routes: routes }),
     render: h => h(require('./components/app/app.vue.html'))
 });
