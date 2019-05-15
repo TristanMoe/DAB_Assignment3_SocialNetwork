@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\store.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ClientApp\components\Account\Account.ts" />
   </ItemGroup>
 
@@ -29,6 +33,10 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\components\Account\Account.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\store.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
