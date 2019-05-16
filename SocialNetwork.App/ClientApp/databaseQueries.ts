@@ -12,6 +12,37 @@
     blockedSubscriberIds: string[];
 }
 
+export class User implements IUser{
+    constructor(userid: string, firstname: string, lastname: string,
+        email: string, gender: string, password: string, feed: string) {
+        this.userId = userid;
+        this.firstName = firstname;
+        this.lastName = lastname;
+        this.email = email;
+        this.gender = gender;
+        this.password = password;
+        this.feed = feed;
+        this.publicPostIds = new Array<string>();
+        this.subscriberIds = new Array<string>();
+        this.subscriptionIds = new Array<string>();
+        this.blockedSubscriberIds = new Array<string>();
+
+        console.log("hello from constructor");
+    }
+
+    userId: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    gender: string;
+    password: string;
+    feed: string;
+    publicPostIds: string[];
+    subscriberIds: string[];
+    subscriptionIds: string[];
+    blockedSubscriberIds: string[];
+}
+
 export interface IPost {
     postId: string; 
     contentId: string; 
@@ -21,7 +52,7 @@ export interface IPost {
 }
 
 export class ApplicationState {
-    static apiUrl: string = 'http://localhost:52176/api/';
+    static apiUrl: string = 'http://localhost:52176//api/';
     static url: string = 'http://localhost:52176/';
 }
 
@@ -62,6 +93,8 @@ export class DataBaseQuery {
     }
 
     blockUser(userToBlock: IUser, userToBeBlocked: IUser) {
+        if (userToBlock.blockedSubscriberIds == null)
+            userToBlock.blockedSubscriberIds = new Array<string>();
         userToBlock.blockedSubscriberIds.push(userToBeBlocked.userId);
         let updateUrl = ApplicationState.apiUrl + "User/" + userToBlock.userId;
         return fetch(updateUrl,

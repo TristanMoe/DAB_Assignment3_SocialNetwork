@@ -2,22 +2,24 @@
 import { Component } from 'vue-property-decorator';
 import * as dbq from "../../databaseQueries";
 import IUser = dbq.IUser;
+import User = dbq.User;
 
 @Component
 export default class BlockUser extends Vue {
     databaseQuery: dbq.DataBaseQuery = new dbq.DataBaseQuery();
     blockEmail: string = '';
-    userToBeBlocked: IUser = {} as IUser;
+    userToBeBlocked: IUser = new User("", "", "", "", "", "", "");
+    userToBlock: IUser = this.$store.state.user;
     getUserToBeBlocked() {
         if (this.blockEmail === '' || this.blockEmail === '')
             return;
         this.databaseQuery.getUserByEmail(this.blockEmail)
-            .then((fetcheduser: IUser) => this.userToBeBlocked = fetcheduser);
+            .then((fetcheduser: User) => this.userToBeBlocked = fetcheduser);
+        console.log(this.userToBeBlocked.email);
     }
     blockUser() {
-        this.$store.state.user.blockedSubscriberIds = new Array();
         console.log("wtf is going on in here");
-        this.databaseQuery.blockUser(this.$store.state.user, this.userToBeBlocked);
+        this.databaseQuery.blockUser(this.userToBlock, this.userToBeBlocked);
     }
     block() {
         this.getUserToBeBlocked();

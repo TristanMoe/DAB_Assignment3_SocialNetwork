@@ -38,7 +38,7 @@ namespace SocialNetwork.Controllers
             return _userService.Get(id);
         }
 
-        [HttpGet("{email}", Name = "GetUserByEmail")]
+        [HttpGet("ByEmail/{email}", Name = "GetUserByEmail")]
         public User GetUser(string email)
         {
             return _userService.GetUser(email);
