@@ -4,5 +4,7 @@ import * as dbq from "../../databaseQueries";
 
 @Component
 export default class navmenu extends Vue {
-    currentUser: dbq.IUser = this.$store.state.user;
+    getCurrentUser() {
+        return this.$store.getters.getUser;
+    }
 }

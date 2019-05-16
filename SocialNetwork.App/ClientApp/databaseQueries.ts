@@ -26,16 +26,17 @@ export class ApplicationState {
 }
 
 export class DataBaseQuery {
-    saveUser(inputEmail: string, inputPassword: string) {
-        return fetch(ApplicationState.apiUrl + 'User/',
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ Email: inputEmail, Password: inputPassword })
-            })
-            .then(response => response.json()) // response.json() returns a promise});
+    createUser(user: IUser) {
+        let bodyUser = JSON.stringify(user);
+        let url = ApplicationState.apiUrl + 'User/';
+        console.log(`Posting new user ${bodyUser} to ${url}`);
+        return fetch(url,
+                {
+                    method: "POST",
+                    body: bodyUser,
+                    headers: new Headers({ "Content-Type": "application/json" }),
+                })
+            .then(response => response.json()); // response.json() returns a promise});
     }
 
     subscribeUser(userToSubscribeTo: IUser, userToSubscribe: IUser) {

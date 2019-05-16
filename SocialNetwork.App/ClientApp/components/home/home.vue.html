@@ -22,8 +22,9 @@
             </label>
         </div>
         <button v-on:click="homeLogin()" class="btn btn-lg btn-primary btn-block" asp-controller="Home" asp-action="Feed">Sign in</button>
-        <p class="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
+        <router-link to="/sign-up">Or sign up here...</router-link>
         <p v-if="error !== '' " class="has-error">{{error}}</p>
+        <p class="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
     </div>
 </template>
 
