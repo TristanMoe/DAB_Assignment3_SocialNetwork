@@ -1,0 +1,44 @@
+<template>
+    <div>
+        <div class="text-center mb-4">
+            <img class="mb-4" src="Images/logo.png" alt="" width="200" height="200">
+            <h1 class="h3 mb-3 font-weight-normal">Welcome to GameHub</h1>
+            <p>Please enter your email and a password to sign up!</p>
+        </div>
+
+
+        <div class="form-label-group">
+            <input type="email" id="inputFirstName" v-model="inputFirstName" class="form-control" placeholder="First Name" required="" autofocus="">
+            <label for="inputFirstName">First Name</label>
+        </div>
+
+
+
+        <div class="form-label-group">
+            <input type="email" id="inputLastName" v-model="inputLastName" class="form-control" placeholder="Last Name" required="" autofocus="">
+            <label for="inputLastName">Last Name</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="email" id="inputGender" v-model="inputGender" class="form-control" placeholder="Gender" required="" autofocus="">
+            <label for="inputGender">Gender</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="email" id="inputEmail" v-model="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+            <label for="inputEmail">Email address</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="password" id="inputPassword" v-model="inputPassword" class="form-control" placeholder="Password" required="">
+            <label for="inputPassword">Password</label>
+        </div>
+
+        <button v-on:click="signUp()" class="btn btn-lg btn-primary btn-block">Sign up</button>
+        <router-link to="/sign-up">Or login here...</router-link>
+        <p v-if="error !== '' " class="has-error">{{error}}</p>
+        <p class="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
+    </div>
+</template>
+
+<script src="./sign-up.ts"></script>

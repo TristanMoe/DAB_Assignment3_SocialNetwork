@@ -37,17 +37,17 @@ export class ApplicationState {
 }
 
 export class DataBaseQuery {
-    saveUser(inputEmail: string, inputPassword: string) {
-        return fetch(ApplicationState.apiUrl + 'User/',
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ Email: inputEmail, Password: inputPassword })
-            })
-            .then(response => response.json()) // response.json() returns a promise});
-        
+    createUser(user: IUser) {
+        let bodyUser = JSON.stringify(user);
+        let url = ApplicationState.apiUrl + 'User/';
+        console.log(`Posting new user ${bodyUser} to ${url}`);
+        return fetch(url,
+                {
+                    method: "POST",
+                    body: bodyUser,
+                    headers: new Headers({ "Content-Type": "application/json" }),
+                })
+            .then(response => response.json()); // response.json() returns a promise});
     }
 
     saveComment(thePost: IPost) {
@@ -88,6 +88,20 @@ export class DataBaseQuery {
             .catch(error => console.log("Error while updating user: ", error));
     }
 
+    blockUser(userToBlock: IUser, userToBeBlocked: IUser) {
+        if (userToBlock.blockedSubscriberIds == null)
+            userToBlock.blockedSubscriberIds = new Array<string>();
+        userToBlock.blockedSubscriberIds.push(userToBeBlocked.userId);
+        let updateUrl = ApplicationState.apiUrl + "User/" + userToBlock.userId;
+        return fetch(updateUrl,
+                {
+                    method: "PUT",
+                    body: JSON.stringify(userToBlock),
+                    headers: new Headers({ "Content-Type": "application/json" })
+                })
+            .catch(error => console.log("error while fetching user", error));
+    }
+
     getAllUsers() {
         let url = ApplicationState.apiUrl + "User/";
         console.log(`Fetching: ${url} ...`);
@@ -98,6 +112,14 @@ export class DataBaseQuery {
 
     getUserById(id: string) {
         let url = `${ApplicationState.apiUrl}User/${id}`;
+        console.log(`Fetching: ${url} ...`);
+        return fetch(url)
+            .then((response) => response.json())
+            .catch(err => console.log("Error while fetching user:", err));
+    }
+
+    getUserByEmail(email: string) {
+        let url = `${ApplicationState.apiUrl}User/ByEmail/${email}`;
         console.log(`Fetching: ${url} ...`);
         return fetch(url)
             .then((response) => response.json())
@@ -117,11 +139,17 @@ export class DataBaseQuery {
         console.log(`Fetching: ${url} ...`);
         return fetch(url)
             .then((response) => response.json())
-            .catch(err => console.log("Error while fetching user:", err));
+            .catch(err => {
+                throw err;
+            });
     }
 
     login(email: string, password: string) {
-        return this.getUserByCredentials(email, password);
+        var userToLogin = this.getUserByCredentials(email, password)
+            .catch(() => {
+                throw "User wasn't found"
+            });
+        return userToLogin;
     }
 }
 
