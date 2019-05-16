@@ -136,6 +136,16 @@ export class DataBaseQuery {
             .catch(err => console.log("Error while fetching posts:", err));
     }
 
+    getAllPostsForUser(user: IUser) {
+        let posts: IPost[] = new Array<IPost>();
+        for (let i = 0; i < user.publicPostIds.length; i++) {
+            fetch(`${ApplicationState.apiUrl}Post/${user.publicPostIds[i]}`)
+                .then(response => response.json()
+                    .then((post: IPost) => posts.push(post)));
+        }
+        return posts;
+    }
+
     getUserByCredentials(email: string, password: string) {
         let url = `${ApplicationState.apiUrl}User/ByCredentials/${email}/${password}`;
         console.log(`Fetching: ${url} ...`);

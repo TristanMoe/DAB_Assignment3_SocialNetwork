@@ -19,7 +19,7 @@ namespace SocialNetwork.App.Controllers.ApiControllers
             _contentService = contentService;
         }
         // GET: api/Content
-        [HttpGet(Name="GetAll")]
+        [HttpGet(Name="GetAllImages")]
         public List<ImageContent> GetAll()
         {
             return _contentService.GetAllImageContents();
@@ -27,7 +27,7 @@ namespace SocialNetwork.App.Controllers.ApiControllers
 
 
         // GET: api/Content/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public ImageContent Get(string id)
         {
             return (ImageContent) _contentService.Get(id);
