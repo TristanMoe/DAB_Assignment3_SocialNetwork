@@ -5,9 +5,9 @@
                 <div v-for="(post, index) in posts">
                     <img src="/Images/icons8-administrator-male-52.png" width="40" height="40" />
                     <strong class="d-block text-gray-dark">{{currentUser.firstName}} {{currentUser.lastName}}</strong>
-                  <div v-for="comment in post.comments">
+                    <div v-for="comment in post.comments">
                         <img src="/Images/icons8-administrator-male-52.png" width="15" height="15" />
-                        <strong class="d-block text-gray-dark">{{getCommentUser(comment.commentAuthorUserId)}}</strong><br>
+                        <strong class="d-block text-gray-dark">{{comment.commentAuthorUserId}}</strong>
                         {{comment.text}}
                     </div>
                     <div class="row commentBtn rounded">

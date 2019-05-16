@@ -15,6 +15,8 @@
 export interface ITextComment {
     text: string; 
     postId: string; 
+    commentAuthorName: string[];
+
 }
 
 export interface IPost {

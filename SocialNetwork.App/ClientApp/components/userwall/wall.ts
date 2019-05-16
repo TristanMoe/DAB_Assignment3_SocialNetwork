@@ -10,7 +10,6 @@ export default class FetchWallComponent extends Vue {
     databaseQuery: dbq.DataBaseQuery = new dbq.DataBaseQuery();
     posts: dbq.IPost[] = new Array<dbq.IPost>();
     currentUser: dbq.IUser = this.$store.state.user; 
-    commentUser: dbq.IUser = {} as dbq.IUser; 
     commentBox: dbq.ITextComment[] = new Array<dbq.ITextComment>(); 
     
     fetchPosts() {
@@ -24,6 +23,7 @@ export default class FetchWallComponent extends Vue {
                             text: "",
                             postId: fetchedPost.postId
                         } as dbq.ITextComment;
+
                         this.commentBox.push(commentbox);
                     }
                 });
@@ -43,14 +43,6 @@ export default class FetchWallComponent extends Vue {
             this.databaseQuery.saveComment(post);
             console.log('Post updated with new comment');
         }
-    }
-    getCommentUser(commentAuthorUserId: string) {
-        this.databaseQuery.getUserById(commentAuthorUserId).then((fetchedUser: dbq.IUser) => {
-            if (fetchedUser !== undefined) {
-                this.commentUser = fetchedUser; 
-            }
-        });
-        return this.commentUser.firstName + " " + this.commentUser.lastName;
     }
     mounted() {
         this.$nextTick(() => {
