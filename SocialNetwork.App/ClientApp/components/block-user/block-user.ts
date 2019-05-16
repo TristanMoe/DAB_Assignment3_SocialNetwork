@@ -2,25 +2,30 @@
 import { Component } from 'vue-property-decorator';
 import * as dbq from "../../databaseQueries";
 import IUser = dbq.IUser;
+import User = dbq.User;
 
 @Component
 export default class BlockUser extends Vue {
     databaseQuery: dbq.DataBaseQuery = new dbq.DataBaseQuery();
-    blockEmail: string = '';
-    userToBeBlocked: IUser = {} as IUser;
-    getUserToBeBlocked() {
-        if (this.blockEmail === '' || this.blockEmail === '')
-            return;
-        this.databaseQuery.getUserByEmail(this.blockEmail)
-            .then((fetcheduser: IUser) => this.userToBeBlocked = fetcheduser);
-    }
+    blockEmail: string = "";
+    userToBlock: IUser = this.$store.state.user;
     blockUser() {
-        this.$store.state.user.blockedSubscriberIds = new Array();
-        console.log("wtf is going on in here");
-        this.databaseQuery.blockUser(this.$store.state.user, this.userToBeBlocked);
+        let url = dbq.ApplicationState.apiUrl + "User/ByEmail/" + this.blockEmail;
+        let self = this;
+        console.log(url);
+        fetch(url)
+            .then(
+                function (response) {
+                    if (response.status !== 200) {
+                        console.log("User to be blocked couldn't be found");
+                        return;
+                    }
+                    response.json()
+                        .then(jsonData => self.databaseQuery.blockUser(self.userToBlock as dbq.IUser, jsonData as dbq.IUser));
+                })
+            .catch(err => console.log("Error happened when fetching data: ", err));
     }
     block() {
-        this.getUserToBeBlocked();
         this.blockUser();
     }
 }
