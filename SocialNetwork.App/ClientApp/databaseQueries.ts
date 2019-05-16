@@ -117,11 +117,17 @@ export class DataBaseQuery {
         console.log(`Fetching: ${url} ...`);
         return fetch(url)
             .then((response) => response.json())
-            .catch(err => console.log("Error while fetching user:", err));
+            .catch(err => {
+                throw err;
+            });
     }
 
     login(email: string, password: string) {
-        return this.getUserByCredentials(email, password);
+        var userToLogin = this.getUserByCredentials(email, password)
+            .catch(() => {
+                throw "User wasn't found"
+            });
+        return userToLogin;
     }
 }
 

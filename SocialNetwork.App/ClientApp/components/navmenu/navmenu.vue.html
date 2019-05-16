@@ -11,7 +11,7 @@
                 <a class="navbar-brand" href="/">SocialNetwork.App</a>
             </div>
             <div class="clearfix"></div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" v-if="currentUser !== null">
                 <ul class="nav navbar-nav">
                     <li>
                         <router-link to="/" :exact="true">
@@ -54,4 +54,5 @@
     </div>
 </template>
 
+<script src="./navmenu.ts"></script>
 <style src="./navmenu.css" />
