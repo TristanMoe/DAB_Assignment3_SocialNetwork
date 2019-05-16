@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\components\block-user.ts" />
+    <None Remove="ClientApp\components\userwall\wall.ts" />
     <None Remove="ClientApp\store.ts" />
   </ItemGroup>
 
@@ -35,6 +36,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\components\Account\Account.ts" />
+    <TypeScriptCompile Include="ClientApp\components\userwall\wall.ts" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,8 @@
 import Vue from 'vue';
+
 import { Component } from 'vue-property-decorator';
 import { ApplicationState } from "../../databaseQueries";
+
 
 @Component({
     components: {
@@ -11,3 +13,5 @@ import { ApplicationState } from "../../databaseQueries";
 export default class AppComponent extends Vue {
     static applicationState : ApplicationState = new ApplicationState();
 }
+
+

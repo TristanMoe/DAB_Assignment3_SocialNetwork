@@ -2,7 +2,6 @@
 import { Component } from 'vue-property-decorator';
 import * as dbq from "../../databaseQueries";
 import IUser = dbq.IUser;
-import User = dbq.User;
 
 @Component
 export default class BlockUser extends Vue {

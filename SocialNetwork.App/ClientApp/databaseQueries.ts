@@ -12,48 +12,30 @@
     blockedSubscriberIds: string[];
 }
 
-export class User implements IUser{
-    constructor(userid: string, firstname: string, lastname: string,
-        email: string, gender: string, password: string, feed: string) {
-        this.userId = userid;
-        this.firstName = firstname;
-        this.lastName = lastname;
-        this.email = email;
-        this.gender = gender;
-        this.password = password;
-        this.feed = feed;
-        this.publicPostIds = new Array<string>();
-        this.subscriberIds = new Array<string>();
-        this.subscriptionIds = new Array<string>();
-        this.blockedSubscriberIds = new Array<string>();
+export interface ITextComment {
+    text: string; 
+    postId: string; 
+    commentAuthorName: string[];
 
-        console.log("hello from constructor");
-    }
-
-    userId: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    gender: string;
-    password: string;
-    feed: string;
-    publicPostIds: string[];
-    subscriberIds: string[];
-    subscriptionIds: string[];
-    blockedSubscriberIds: string[];
 }
 
 export interface IPost {
     postId: string; 
     contentId: string; 
     postTimeStamp: string;
-    comments: string[]; 
+    comments: IComment[]; 
     postContent: string; 
 }
 
+export interface IComment {
+    commentTimeStamp: string; 
+    commentAuthorUserId: string; 
+    text: string; 
+}
+
 export class ApplicationState {
-    static apiUrl: string = 'http://localhost:52176/api/';
-    static url: string = 'http://localhost:52176/';
+    static apiUrl: string = 'http://localhost:50605/api/';
+    static url: string = 'http://localhost:50605/';
 }
 
 export class DataBaseQuery {
@@ -70,6 +52,21 @@ export class DataBaseQuery {
             .then(response => response.json()); // response.json() returns a promise});
     }
 
+    saveComment(thePost: IPost) {
+        let url = ApplicationState.apiUrl + "Post/" + thePost.postId;
+        let apibody = JSON.stringify((thePost));
+        console.log(apibody); 
+        console.log("Fetching... " + url);
+        return fetch(url,
+            {
+                method: "PUT",
+                body: JSON.stringify(thePost),
+                headers: new Headers({ "Content-Type": "application/json" }),
+            })
+            .catch(err => console.log("Error while fetching user:", err));
+    }
+
+  
     subscribeUser(userToSubscribeTo: IUser, userToSubscribe: IUser) {
         if (userToSubscribe.subscriptionIds == null)
             userToSubscribe.subscriptionIds = new Array<string>();
@@ -131,17 +128,10 @@ export class DataBaseQuery {
             .catch(err => console.log("Error while fetching user:", err));
     }
 
-    getPostsForUser(id: string[]) {
-        let url = `${ApplicationState.apiUrl}/Post/`;
+    getPostForUser(id: string) {
+        let url = `${ApplicationState.apiUrl}Post/${id}`;
         console.log(`Fetching: ${url} ...`);
-        return fetch(url,
-                {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(id),
-                })
+        return fetch(url)
             .then((response) => response.json())
             .catch(err => console.log("Error while fetching posts:", err));
     }
