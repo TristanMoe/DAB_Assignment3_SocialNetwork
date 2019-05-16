@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SocialNetwork.App.Services;
 using SocialNetwork.Services;
 
 namespace SocialNetwork.App
@@ -28,6 +29,7 @@ namespace SocialNetwork.App
             services.AddScoped<UserFeedService>();
             services.AddScoped<GroupFeedServices>();
             services.AddScoped<UserService>();
+            services.AddScoped<ContentService>();
 
             services.AddMvc();
         }
