@@ -7,22 +7,25 @@ import User = dbq.User;
 @Component
 export default class BlockUser extends Vue {
     databaseQuery: dbq.DataBaseQuery = new dbq.DataBaseQuery();
-    blockEmail: string = '';
-    userToBeBlocked: IUser = new User("", "", "", "", "", "", "");
+    blockEmail: string = "";
     userToBlock: IUser = this.$store.state.user;
-    getUserToBeBlocked() {
-        if (this.blockEmail === '' || this.blockEmail === '')
-            return;
-        this.databaseQuery.getUserByEmail(this.blockEmail)
-            .then((fetcheduser: User) => this.userToBeBlocked = fetcheduser);
-        console.log(this.userToBeBlocked.email);
-    }
     blockUser() {
-        console.log("wtf is going on in here");
-        this.databaseQuery.blockUser(this.userToBlock, this.userToBeBlocked);
+        let url = dbq.ApplicationState.apiUrl + "User/ByEmail/" + this.blockEmail;
+        let self = this;
+        console.log(url);
+        fetch(url)
+            .then(
+                function (response) {
+                    if (response.status !== 200) {
+                        console.log("User to be blocked couldn't be found");
+                        return;
+                    }
+                    response.json()
+                        .then(jsonData => self.databaseQuery.blockUser(self.userToBlock as dbq.IUser, jsonData as dbq.IUser));
+                })
+            .catch(err => console.log("Error happened when fetching data: ", err));
     }
     block() {
-        this.getUserToBeBlocked();
         this.blockUser();
     }
 }

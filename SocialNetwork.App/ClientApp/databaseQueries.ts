@@ -52,7 +52,7 @@ export interface IPost {
 }
 
 export class ApplicationState {
-    static apiUrl: string = 'http://localhost:52176//api/';
+    static apiUrl: string = 'http://localhost:52176/api/';
     static url: string = 'http://localhost:52176/';
 }
 
