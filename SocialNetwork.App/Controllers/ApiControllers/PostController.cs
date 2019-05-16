@@ -42,13 +42,14 @@ namespace SocialNetwork.Server.Controllers
 
         // POST: api/Post
 
-        [HttpPut("{id}")]
-        public void UpdatePost(string id, [FromBody]Post post)
+        [HttpPut("{id:length(24)}")]
+        public IActionResult UpdatePost(string id, [FromBody]Post post)
         {
             var getPost = _postServices.GetPublicPost(id);
             post.PostId = getPost.PostId;
             _postServices.UpdatePost(id, post);
 
+            return NoContent();
         }
 
         // PUT: api/Post/5

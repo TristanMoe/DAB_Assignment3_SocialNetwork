@@ -7,5 +7,6 @@ namespace SocialNetwork.Model
     [BsonKnownTypes(typeof(TextContent),typeof(ImageContent))]
     public class BaseContent
     {
+
     }
 }

@@ -12,17 +12,28 @@
     blockedSubscriberIds: string[];
 }
 
+export interface ITextComment {
+    text: string; 
+    postId: string; 
+}
+
 export interface IPost {
     postId: string; 
     contentId: string; 
     postTimeStamp: string;
-    comments: string[]; 
+    comments: IComment[]; 
     postContent: string; 
 }
 
+export interface IComment {
+    commentTimeStamp: string; 
+    commentAuthorUserId: string; 
+    text: string; 
+}
+
 export class ApplicationState {
-    static apiUrl: string = 'http://localhost:56490/api/';
-    static url: string = 'http://localhost:56490/';
+    static apiUrl: string = 'http://localhost:50605/api/';
+    static url: string = 'http://localhost:50605/';
 }
 
 export class DataBaseQuery {
@@ -36,8 +47,24 @@ export class DataBaseQuery {
                 body: JSON.stringify({ Email: inputEmail, Password: inputPassword })
             })
             .then(response => response.json()) // response.json() returns a promise});
+        
     }
 
+    saveComment(thePost: IPost) {
+        let url = ApplicationState.apiUrl + "Post/" + thePost.postId;
+        let apibody = JSON.stringify((thePost));
+        console.log(apibody); 
+        console.log("Fetching... " + url);
+        return fetch(url,
+            {
+                method: "PUT",
+                body: JSON.stringify(thePost),
+                headers: new Headers({ "Content-Type": "application/json" }),
+            })
+            .catch(err => console.log("Error while fetching user:", err));
+    }
+
+  
     subscribeUser(userToSubscribeTo: IUser, userToSubscribe: IUser) {
         if (userToSubscribe.subscriptionIds == null)
             userToSubscribe.subscriptionIds = new Array<string>();
@@ -61,7 +88,6 @@ export class DataBaseQuery {
             .catch(error => console.log("Error while updating user: ", error));
     }
 
-
     getAllUsers() {
         let url = ApplicationState.apiUrl + "User/";
         console.log(`Fetching: ${url} ...`);
@@ -78,17 +104,10 @@ export class DataBaseQuery {
             .catch(err => console.log("Error while fetching user:", err));
     }
 
-    getPostsForUser(id: string[]) {
-        let url = `${ApplicationState.apiUrl}/Post/`;
+    getPostForUser(id: string) {
+        let url = `${ApplicationState.apiUrl}Post/${id}`;
         console.log(`Fetching: ${url} ...`);
-        return fetch(url,
-                {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(id),
-                })
+        return fetch(url)
             .then((response) => response.json())
             .catch(err => console.log("Error while fetching posts:", err));
     }
