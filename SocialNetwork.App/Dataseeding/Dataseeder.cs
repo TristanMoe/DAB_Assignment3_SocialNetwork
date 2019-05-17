@@ -128,7 +128,8 @@ namespace SocialNetwork.App.Dataseeding
             _userCollection.InsertOneAsync(Ole);
             _userCollection.InsertOneAsync(Niels);
             _userCollection.InsertOneAsync(Susanne);
-            _userCollection.InsertOneAsync(Gertrud); 
+            _userCollection.InsertOneAsync(Gertrud);
+            _userCollection.InsertOneAsync(Jens);
             #endregion
 
             #region Post insert
@@ -195,14 +196,8 @@ namespace SocialNetwork.App.Dataseeding
             _postCollection.InsertOneAsync(PostByOleCommentedByNiels);
             _postCollection.InsertOneAsync(PostByNielsCommentedByOle);
             #endregion
-
-
-
+            
 
         }
-
-
-
-
     }
 }
