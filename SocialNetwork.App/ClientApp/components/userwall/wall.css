@@ -1,2 +1,27 @@
-﻿body {
+﻿.commentBtn {
+    margin-top: 6px;
+    font-size: small;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.mainpost {
+    border-bottom: 2px solid #3b5998;
+}
+
+
+.post {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border: 2px solid gray;
+}
+
+#button {
+    background: #3b5998;
+}
+
+.comment {
+    margin-top: 2px;
+    border: 2px solid #4e71ba;
+    border-radius: 5px;
 }

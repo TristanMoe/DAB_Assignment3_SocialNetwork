@@ -46,7 +46,7 @@ namespace SocialNetwork.Controllers
 
         // POST: api/User
         [HttpPost]
-        public User Create(User user)
+        public User Create([FromBody] User user)
         {
             return _userService.Create(user);
         }

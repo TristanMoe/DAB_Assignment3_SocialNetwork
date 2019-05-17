@@ -11,44 +11,65 @@
                 <a class="navbar-brand" href="/">SocialNetwork.App</a>
             </div>
             <div class="clearfix"></div>
-            <div class="navbar-collapse collapse" v-if="currentUser !== null">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <router-link to="/" :exact="true">
-                            <span class="glyphicon glyphicon-home"></span> Home
-                        </router-link>
-                    </li>
-                    <li>
-                        <router-link to="/counter">
-                            <span class="glyphicon glyphicon-education"></span> Counter
-                        </router-link>
-                    </li>
-                    <li>
-                        <router-link to="/fetchdata">
-                            <span class="glyphicon glyphicon-th-list"></span> Fetch data
-                        </router-link>
-                    </li>
-                    <li>
-                        <router-link to="/follow-user">
-                            <span class="glyphicon glyphicon-cog"></span> Follow user
-                        </router-link>
-                    </li>
-                    <li>
-                        <router-link to="/Account">
-                            <span class="glyphicon glyphicon-user"></span> Account
-                        </router-link>
-                    </li>
-                    <li>
-                        <router-link to="/wall">
-                            <span class="glyphicon glyphicon-list-alt"></span> Wall
-                        </router-link>
-                    </li>
-                    <li>
-                        <router-link to="/block-user">
-                            <span class="glyphicon glyphicon-ban-circle"></span> Block user
-                        </router-link>
-                    </li>
-                </ul>
+            <div class="navbar-collapse collapse">
+                <div v-if="getCurrentUser() === '' ">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <router-link to="/" :exact="true">
+                                <span class="glyphicon glyphicon-home"></span> Sign in
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/sign-up">
+                                <span class="glyphicon glyphicon-user"></span> Sign up 
+                            </router-link>
+                        </li>
+                    </ul>
+                </div>
+                <div v-else>
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <router-link to="/" :exact="true">
+                                <span class="glyphicon glyphicon-home"></span> Home
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/counter">
+                                <span class="glyphicon glyphicon-education"></span> Counter
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/fetchdata">
+                                <span class="glyphicon glyphicon-th-list"></span> Fetch data
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/follow-user">
+                                <span class="glyphicon glyphicon-cog"></span> Follow user
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/Account">
+                                <span class="glyphicon glyphicon-user"></span> Account
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/feed">
+                                <span class="glyphicon glyphicon-list-alt"></span> Feed
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/wall">
+                                <span class="glyphicon glyphicon-list-alt"></span> Wall
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/block-user">
+                                <span class="glyphicon glyphicon-ban-circle"></span> Block user
+                            </router-link>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

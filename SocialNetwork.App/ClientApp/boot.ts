@@ -12,7 +12,9 @@ const routes = [
     { path: '/follow-user', component: require('./components/follow-user/follow-user.vue.html') },
     { path: '/Account', component: require('./components/Account/Account.vue.html') },
     { path: '/wall', component: require('./components/userwall/wall.vue.html') },
-    { path: '/block-user', component: require('./components/block-user/block-user.vue.html')}
+    { path: '/block-user', component: require('./components/block-user/block-user.vue.html') },
+    { path: '/sign-up', component: require('./components/sign-up/sign-up.vue.html') },
+    { path: '/feed', component: require('./components/feed/feed.vue.html') }
 ];
 
 new Vue({

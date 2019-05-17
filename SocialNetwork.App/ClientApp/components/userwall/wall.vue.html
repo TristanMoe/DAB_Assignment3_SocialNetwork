@@ -1,18 +1,18 @@
 <template>
     <div>
-        <div class="media text-muted pt-3">
-            <img src="/Images/icons8-administrator-male-52.png" width="40" height="40" />
-            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                <div v-for="post in posts">
-                    <strong class="d-block text-gray-dark">{{currentUser.firstName}} {{currentUser.lastName}}</strong>
-                    {{post.postContent}}, {{post.postTimeStamp}}
-                    <div v-for="comment in comments">
+        <div class="media text-muted pt-3 wall">
+            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray entirepost">
+                <div v-for="(post, index) in posts" class="post">
+                    <img src="/Images/icons8-administrator-male-52.png" width="40" height="40" />
+                    <strong class="d-block text-gray-dark mainpost">{{currentUser.firstName}} {{currentUser.lastName}}</strong>
+                    <div v-for="comment in post.comments" class="comment">
                         <img src="/Images/icons8-administrator-male-52.png" width="15" height="15" />
-                        {{comment}}
+                        <strong class="d-block text-gray-dark">{{comment.commentAuthorUserId}}</strong>
+                        {{comment.text}}
                     </div>
                     <div class="row commentBtn rounded">
-                        <input class="col-10 rounded"/>
-                        <button class="col-2 rounded" v-on:click="addComment()"></button>
+                        <input class="col-10 rounded" v-model="commentBox[index].text" placeholder="Share your thoughts?"/>
+                        <button class="col-2 rounded commentBtn" v-on:click="addComment(commentBox[index])">Comment</button>
                     </div>
                 </div>
             </p>
@@ -20,6 +20,6 @@
     </div>
 </template>
 
-<script src="./wall.tsx"></script>
+<script src="./wall.ts"></script>
 
 <style src="./wall.css"></style>
