@@ -35,7 +35,9 @@ export default class FetchWallComponent extends Vue {
         var comment = {
             commentTimeStamp: JSON.stringify(Date),
             commentAuthorUserId: this.currentUser.userId,
-            text: commentBox.text
+            text: commentBox.text,
+            firstName: this.currentUser.firstName,
+            lastName: this.currentUser.lastName
         } as dbq.IComment;
 
         if (post !== undefined) {

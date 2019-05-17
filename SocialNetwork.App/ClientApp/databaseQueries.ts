@@ -32,6 +32,8 @@ export interface IComment {
     commentTimeStamp: string; 
     commentAuthorUserId: string; 
     text: string; 
+    firstName: string;
+    lastName: string;
 }
 
 export interface IGroupFeed {

@@ -12,5 +12,7 @@ namespace SocialNetwork.Model
         [BsonRepresentation(BsonType.ObjectId)]
         public string CommentAuthorUserId { get; set; }
         public string Text { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

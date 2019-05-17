@@ -33,9 +33,9 @@ namespace SocialNetwork.App.Dataseeding
             _db.DropCollectionAsync("GroupFeed");
 
 
-            _db.CreateCollectionAsync("GroupFeed");
             _db.CreateCollectionAsync("User");
             _db.CreateCollectionAsync("Post");
+            _db.CreateCollectionAsync("GroupFeed");
 
             #region groupfeed insert
 
@@ -210,7 +210,9 @@ namespace SocialNetwork.App.Dataseeding
             {
                 CommentAuthorUserId = "5cdd705eace4a36e8c3ca123",
                 CommentTimeStamp = DateTime.Now,
-                Text = "Jeg skal have de fineste ris nede fra Rema 1000!"
+                Text = "Jeg skal have de fineste ris nede fra Rema 1000!",
+                FirstName = "Susanne",
+                LastName = "Ibsen"
             });
 
             var PostByOleCommentedByNiels = new Post
@@ -227,13 +229,17 @@ namespace SocialNetwork.App.Dataseeding
             {
                 CommentAuthorUserId = "5cdd705eace4a36e8c3ca122",
                 CommentTimeStamp = DateTime.Now,
-                Text = "Det skal du ikke bestemme!"
+                Text = "Det skal du ikke bestemme!",
+                FirstName = "Niels",
+                LastName = "Pedersen"
             });
             PostByOleCommentedByNiels.Comments.Add(new Comment()
             {
                 CommentAuthorUserId = "5cdd705eace4a36e8c3ca123",
                 CommentTimeStamp = DateTime.Now,
-                Text = "Jeg ændrer den nu til \"Æd en ged og dø!\""
+                Text = "Jeg ændrer den nu til \"Æd en ged og dø!\"",
+                FirstName = "Susanne",
+                LastName = "Ibsen"
             });
 
             var PostByNielsCommentedByOle = new Post()
@@ -250,7 +256,9 @@ namespace SocialNetwork.App.Dataseeding
             {
                 CommentAuthorUserId = "5cdd705eace4a36e8c3ca121",
                 CommentTimeStamp = DateTime.Now,
-                Text = "Stem på Rasmus Klump! Sløj kurs!"
+                Text = "Stem på Rasmus Klump! Sløj kurs!",
+                FirstName = "Ole",
+                LastName = "Andersen"
                 
             });
 
@@ -259,14 +267,6 @@ namespace SocialNetwork.App.Dataseeding
             _postCollection.InsertOneAsync(PostByOleCommentedByNiels);
             _postCollection.InsertOneAsync(PostByNielsCommentedByOle);
             #endregion
-
-           
-
-
         }
-
-
-
-
     }
 }

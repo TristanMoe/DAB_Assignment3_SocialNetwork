@@ -5,14 +5,15 @@
                 <div v-for="(post, index) in posts" class="post">
                     <img src="/Images/icons8-administrator-male-52.png" width="40" height="40" />
                     <strong class="d-block text-gray-dark mainpost">{{currentUser.firstName}} {{currentUser.lastName}}</strong>
+                    <p>{{post.postContent.text}}</p>
                     <div v-for="comment in post.comments" class="comment">
                         <img src="/Images/icons8-administrator-male-52.png" width="15" height="15" />
-                        <strong class="d-block text-gray-dark">{{comment.commentAuthorUserId}}</strong>
+                        <strong class="d-block text-gray-dark">{{comment.firstName}} {{comment.lastName}}, </strong>
                         {{comment.text}}
                     </div>
                     <div class="row commentBtn rounded">
                         <input class="col-10 rounded" v-model="commentBox[index].text" placeholder="Share your thoughts?"/>
-                        <button class="col-2 rounded commentBtn" v-on:click="addComment(commentBox[index])">Comment</button>
+                        <button class="col-2 rounded" v-on:click="addComment(commentBox[index])">Comment</button>
                     </div>
                 </div>
             </p>
