@@ -6,6 +6,8 @@ import ICreatePost = dbq.ICreatePost;
 import IComment = dbq.IComment;
 import IGroupFeed = dbq.IGroupFeed;
 
+import ITextContent = dbq.ITextContent;
+
 
 @Component
 export default class CreatePostComponent extends Vue {
@@ -16,35 +18,42 @@ export default class CreatePostComponent extends Vue {
     selectedGroup:string="Public Post";
     public postThePost() {
         var i=this;
-        
+        let textcontent = { text: i.text } as ITextContent;
         var post: ICreatePost = {
-            text: i.text,
-            postTimeStamp: Date.now().toString(),
-            comments: {} as Array<IComment>,
-            nameOfPoster: i.$store.state.user
-        }       
+            postContent: textcontent ,
+            comments: [],
+            nameOfPoster: i.user.firstName + " " + i.user.lastName
+    }       
 
 
-        var postId = "";
+        var postId:string = "";
         this.database.createPost(post).then((response) => {
-            postId = response.Id;
-        });
+            postId = response.postId;
         
+        if (postId === "")
+            return;
       
-        if (this.selectedGroup === "Public Post") {
-            i.$store.state.user.publicPostIds.push(postId);
+            if (i.selectedGroup === "Public Post") {
+                if (i.user.publicPostIds == null)
+                    i.user.publicPostIds = [];
+            i.user.publicPostIds.push(postId);
+                i.database.updateUser(i.user.userId, i.user);
+                i.$router.push('/wall');
         }
         else {
             i.groupfeeds.forEach((value) => {
                 if (value.groupFeedName === i.selectedGroup) {
+                    if (value.groupPostIds == null)
+                        value.groupPostIds = [];
                     value.groupPostIds.push(postId);
-                    i.database.updateGroupFeed(postId,value);
+                    i.database.updateGroupFeed(value.groupFeedId, value).then(() => console.log("groupPostIds updated in user with new post id"));
+                    i.$router.push('/wall');
                     return;
                 }
             });
 
         }
-
+        });
 
     
     }

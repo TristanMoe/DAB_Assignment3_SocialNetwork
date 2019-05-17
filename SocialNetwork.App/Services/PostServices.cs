@@ -56,7 +56,7 @@ namespace DAB_Assignment3_SocialNetwork_Client.Services
 
 
         public Post InsertPost(Post post)
-        {
+        {         
             _posts.InsertOne(post);
             return post;
         }

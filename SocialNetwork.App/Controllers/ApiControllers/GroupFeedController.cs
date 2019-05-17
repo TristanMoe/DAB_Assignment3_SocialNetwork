@@ -42,13 +42,15 @@ namespace SocialNetwork.Client.ApiControllers
 
         // PUT: api/GroupFeed/5
         [HttpPut("{id}")]
-        public void Put(string id, [FromBody] GroupFeed feed)
+        public ActionResult Put(string id, [FromBody] GroupFeed feed)
         {
             var getFeed = _groupFeedServices.GetGroupFeed(id);
-            feed.GroupFeedId = getFeed.GroupFeedId;
             if (getFeed == null)
-                return;
+                return NotFound();
+            feed.GroupFeedId = getFeed.GroupFeedId;
+           
             _groupFeedServices.PutGroupFeed(id, feed);
+            return NoContent();
 
         }
 

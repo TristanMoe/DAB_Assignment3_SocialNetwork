@@ -55,7 +55,7 @@ namespace SocialNetwork.Server.Controllers
         // PUT: api/Post/5
 
 
-        [HttpPost(Name = "Create")]
+        [HttpPost]
         public Post Create([FromBody]Post post)
         {
             var retPost = _postServices.InsertPost(post);

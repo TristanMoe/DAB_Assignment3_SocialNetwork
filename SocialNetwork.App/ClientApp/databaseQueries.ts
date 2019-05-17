@@ -43,11 +43,14 @@ export interface IGroupFeed {
     usersInGroupFeed: string[];
 }
 
+export interface ITextContent {
+    text: string;
+}
+
 
 
 export interface ICreatePost {
-    text: string;
-    postTimeStamp: string;
+    postContent: ITextContent;
     comments: Array<IComment>;
     nameOfPoster: string;
 }
@@ -192,14 +195,15 @@ export class DataBaseQuery {
     }
 
     createPost(post: ICreatePost) {
-        let url = `${ApplicationState.apiUrl}Post/}`;
+        let url = `${ApplicationState.apiUrl}Post/`;
         console.log(`Fetching: ${url} ...`);
         return fetch(url,
                 {
                     method: "POST",
-                    headers: {
+                    headers: new Headers({
+                        'Accept': 'application/json',
                         "Content-Type": "application/json"
-                    },
+                    }),
                     body: JSON.stringify(post)
                 })
             .then((response) => response.json())
@@ -220,6 +224,24 @@ export class DataBaseQuery {
             .then((response) => response.json())
             .catch(err => console.log("Error while putting GroupFeed:", err));
     }
+
+    updateUser(id: string, user: IUser) {
+        let url = `${ApplicationState.apiUrl}User/${id}`;
+        console.log(`Fetching: ${url} ...`);
+        return fetch(url,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(user)
+                })
+            .then((response) => response.json())
+            .catch(err => console.log("Error while updating user:", err));
+    }
+    /*createTextContent(content: ITextContent) {
+        let url = `${ApplicationState.apiUrl}TextContent/`;
+    }*/
 }
 
 function getCookie() {
