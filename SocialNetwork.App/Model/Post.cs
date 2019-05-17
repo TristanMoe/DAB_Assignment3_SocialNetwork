@@ -20,5 +20,6 @@ namespace SocialNetwork.Model
         public List<Comment> Comments { get; set; }
 
         public BaseContent PostContent { get; set; }
+        public string NameOfPoster { get; set; }
     }
 }

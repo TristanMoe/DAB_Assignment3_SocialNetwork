@@ -1,0 +1,15 @@
+﻿<template>
+    <div>
+        <h1>Create Post</h1>
+        <select v-model="selectedGroup">
+            <option v-for="groupfeed in groupfeeds">{{groupfeed.groupFeedName}}</option>
+            <option Value="public">Public Post</option>
+        </select>
+        <br/>
+        <input type="text" />
+        <button v-on:click="postThePost"></button>
+    </div>
+    
+</template>
+
+<script src="./CreatePost.ts"></script>

@@ -37,9 +37,10 @@ namespace SocialNetwork.Services
             return _groupFeeds.Find(g => g.GroupFeedId == id).FirstOrDefault();
         }
 
-        public void InsertGroupFeed(GroupFeed feed)
+        public GroupFeed InsertGroupFeed(GroupFeed feed)
         {
             _groupFeeds.InsertOne(feed);
+            return feed;
         }
 
         public void PutGroupFeed(string id, GroupFeed feed)

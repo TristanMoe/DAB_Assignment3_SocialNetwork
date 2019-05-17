@@ -34,9 +34,10 @@ namespace SocialNetwork.Client.ApiControllers
 
         // POST: api/GroupFeed
         [HttpPost]
-        public void Post([FromBody] GroupFeed feed)
+        public GroupFeed Post([FromBody] GroupFeed feed)
         {
             _groupFeedServices.InsertGroupFeed(feed);
+            return feed;
         }
 
         // PUT: api/GroupFeed/5
