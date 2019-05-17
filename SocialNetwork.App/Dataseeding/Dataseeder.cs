@@ -21,7 +21,8 @@ namespace SocialNetwork.App.Dataseeding
         /// Collections
         /// </summary>
         private IMongoCollection<User> _userCollection;
-        private IMongoCollection<Post> _postCollection; 
+        private IMongoCollection<Post> _postCollection;
+        private IMongoCollection<GroupFeed> _groupFeedCollection;
 
         public Dataseeder()
         {
@@ -29,9 +30,40 @@ namespace SocialNetwork.App.Dataseeding
             _db = _client.GetDatabase("SocialNetworkDb");
             _db.DropCollectionAsync("User");
             _db.DropCollectionAsync("Post");
+            _db.DropCollectionAsync("GroupFeed");
 
+
+            _db.CreateCollectionAsync("GroupFeed");
             _db.CreateCollectionAsync("User");
             _db.CreateCollectionAsync("Post");
+
+            #region groupfeed insert
+
+            var groupfeed = new GroupFeed
+            {
+                GroupFeedId = "123d705eace4a36e8c3ca125",
+                GroupFeedName = "Aabyhøj IF",
+                GroupPostIds = new List<string>
+                {
+                    "5cdd705eace4a36e8c3ca12c",
+                    "5cdd705eace4a36e8c3ca121"
+
+                },
+                UsersInGroupFeed = new List<string>
+                {
+                    "5cdd705eace4a36e8c3ca121",
+                    "5cdd705eace4a36e8c3ca122"
+                }
+
+
+            };
+
+            _groupFeedCollection = _db.GetCollection<GroupFeed>("GroupFeed");
+            _groupFeedCollection.InsertOne(groupfeed);
+
+
+
+            #endregion
 
             #region User insert
             var Ole = new User
@@ -42,6 +74,10 @@ namespace SocialNetwork.App.Dataseeding
                 Email = "Ole@hotmail.com",
                 Gender = "Male",
                 Password = "1234",
+                GroupFeedIds = new List<string>
+                {
+                    "123d705eace4a36e8c3ca125"
+                },
                 PublicPostIds = new List<string>(),
                 BlockedSubscriberIds = new List<string>(),
                 SubscriptionIds = new List<string>(),
@@ -76,6 +112,11 @@ namespace SocialNetwork.App.Dataseeding
                 Email = "Niels@hotmail.com",
                 Gender = "Male",
                 Password = "4321",
+                GroupFeedIds = new List<string>
+                {
+                    "123d705eace4a36e8c3ca125"
+                },
+                BlockedSubscriberIds = new List<string>(),
                 PublicPostIds = new List<string>(),
                 SubscriptionIds = new List<string>(),
                 SubscriberIds = new List<string>()
@@ -96,6 +137,12 @@ namespace SocialNetwork.App.Dataseeding
                 Email = "Susanne@hotmail.com",
                 Gender = "Female",
                 Password = "1010",
+                GroupFeedIds = new List<string>
+                {
+                    "123d705eace4a36e8c3ca125"
+                },
+                BlockedSubscriberIds = new List<string>(),
+                PublicPostIds = new List<string>(),
                 SubscriptionIds = new List<string>(),
                 SubscriberIds = new List<string>()
             };
@@ -111,7 +158,15 @@ namespace SocialNetwork.App.Dataseeding
                 LastName = "Jensen",
                 Email = "Gertrud@hotmail.com",
                 Gender = "Female",
-                Password = "5010"
+                Password = "5010",
+                GroupFeedIds = new List<string>
+                {
+                    "123d705eace4a36e8c3ca125"
+                },
+                BlockedSubscriberIds = new List<string>(),
+                PublicPostIds = new List<string>(),
+                SubscriptionIds = new List<string>(),
+                SubscriberIds = new List<string>()
             };
 
             var Jens = new User()
@@ -121,7 +176,15 @@ namespace SocialNetwork.App.Dataseeding
                 LastName = "Smith",
                 Email = "Jens@hotmail.com",
                 Gender = "Male",
-                Password = "8080"
+                Password = "8080",
+                GroupFeedIds = new List<string>
+                {
+                    "123d705eace4a36e8c3ca125"
+                },
+                BlockedSubscriberIds = new List<string>(),
+                PublicPostIds = new List<string>(),
+                SubscriptionIds = new List<string>(),
+                SubscriberIds = new List<string>()
             };
 
             _userCollection = _db.GetCollection<User>("User");
@@ -196,7 +259,7 @@ namespace SocialNetwork.App.Dataseeding
             _postCollection.InsertOneAsync(PostByNielsCommentedByOle);
             #endregion
 
-
+           
 
 
         }
