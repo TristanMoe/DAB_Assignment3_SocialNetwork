@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using SocialNetwork.App.Dataseeding;
 
 namespace SocialNetwork.App
 {
@@ -14,7 +15,13 @@ namespace SocialNetwork.App
     {
         public static void Main(string[] args)
         {
+            MainAsync().Wait();
             BuildWebHost(args).Run();
+        }
+
+        static async Task MainAsync()
+        {
+            var dataseeder = new Dataseeder(); 
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

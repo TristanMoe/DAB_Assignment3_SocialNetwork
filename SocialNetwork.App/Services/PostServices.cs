@@ -35,6 +35,12 @@ namespace DAB_Assignment3_SocialNetwork_Client.Services
             return posts;
         }
 
+
+        public List<Post> GetPublicPosts()
+        {
+            return _posts.Find(post => true).ToList();
+        }
+
         public Post GetPublicPost(string Id)
         {
             var post = _posts.Find<Post>(p => p.PostId == Id).FirstOrDefault();
