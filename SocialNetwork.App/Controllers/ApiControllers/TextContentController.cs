@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,7 +19,7 @@ namespace SocialNetwork.App.Controllers.ApiControllers
             _contentService = contentService;
         }
         // GET: api/Content
-        [HttpGet(Name="GetAll")]
+        [HttpGet(Name="GetAllText")]
         public List<TextContent> GetAll()
         {
             return _contentService.GetAllTextContents();
@@ -27,7 +27,7 @@ namespace SocialNetwork.App.Controllers.ApiControllers
 
 
         // GET: api/Content/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public TextContent Get(string id)
         {
             return (TextContent) _contentService.Get(id);
@@ -57,3 +57,4 @@ namespace SocialNetwork.App.Controllers.ApiControllers
         }
     }
 }
+*/

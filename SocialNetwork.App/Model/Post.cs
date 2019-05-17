@@ -11,14 +11,15 @@ namespace SocialNetwork.Model
         [BsonRepresentation(BsonType.ObjectId)]
         public string PostId { get; set; }
 
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string ContentId { get; set; }
+        /*[BsonRepresentation(BsonType.ObjectId)]
+        public string ContentId { get; set; }*/
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime PostTimeStamp { get; set; }
 
         public List<Comment> Comments { get; set; }
 
-        public BaseContent PostContent { get; set; }
+        public TextContent PostContent { get; set; }
+        public string NameOfPoster { get; set; }
     }
 }

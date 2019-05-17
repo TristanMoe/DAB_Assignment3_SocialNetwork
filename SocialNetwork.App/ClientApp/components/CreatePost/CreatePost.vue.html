@@ -1,0 +1,40 @@
+﻿<template>
+    <div class="container">
+        <h1>Create Post</h1>
+        <div class="row">
+            <div class="col-md-3">
+                <label>Choose group to post in:</label>
+            </div>
+            <div class="col-md-3">
+                <select class="custom-select d-block w-100" v-model="selectedGroup">
+                    <option v-for="groupfeed in groupfeeds">{{groupfeed.groupFeedName}}</option>
+                    <option Value="Public Post">Public Post</option>
+                </select>
+            </div>
+        </div>
+        
+        <br/>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-3">
+                    <label>Write post here:</label>
+                </div>
+                <div class="col-md-6">
+                    <textarea class="span6" placeholder="what dou you want to say?" v-model="text" style="width: 60%" required></textarea>
+                    <br/>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-3">
+                <button class="btn btn-lg btn-primary btn-block" v-on:click="postThePost">Post</button>
+            </div>
+        </div> 
+           
+        
+    </div>
+    
+</template>
+<style src="./CreatePost.css"></style>
+<script src="./CreatePost.ts"></script>

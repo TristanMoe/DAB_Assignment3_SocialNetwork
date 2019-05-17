@@ -1,6 +1,6 @@
 ﻿<template>
     <div>
-        <h1>Blocked users</h1>
+        <h1>Block user</h1>
         <hr />
         <div>
             <label for="inputEmail">Email address to block:</label>
@@ -11,14 +11,13 @@
             </div>
         </div>
         <hr />
-        <div style="font-size: x-large">
-            <h3>Currently blocked</h3>
+        <div style="font-size: large">
+            <h1>Currently blocked</h1>
             <br />
-            <dl v-for="blockedSubscriber in blockedSubscribers">
-                <dt>{{blockedSubscriber.firstName}} {{blockedSubscriber.lastName}} {{blockedSubscriber.email}}</dt>
+            <dl v-for="blockedUser in currentlyBlocked">
+                <dt>{{blockedUser.firstName}} {{blockedUser.lastName}}, {{blockedUser.email}}</dt>
             </dl>
         </div>
     </div>
 </template>
-
 <script src="./block-user.ts"></script>

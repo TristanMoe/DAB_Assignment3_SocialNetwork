@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿/*using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
@@ -62,3 +62,4 @@ namespace SocialNetwork.App.Services
         }
     }
 }
+*/

@@ -55,10 +55,11 @@ namespace SocialNetwork.Server.Controllers
         // PUT: api/Post/5
 
 
-        [HttpPost(Name = "Create")]
-        public void Create([FromBody]Post post)
+        [HttpPost]
+        public Post Create([FromBody]Post post)
         {
-            _postServices.InsertPost(post);
+            var retPost = _postServices.InsertPost(post);
+            return retPost;
         }
 
         // DELETE: api/ApiWithActions/5

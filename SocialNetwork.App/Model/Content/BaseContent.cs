@@ -7,8 +7,8 @@ namespace SocialNetwork.Model
     [BsonKnownTypes(typeof(TextContent),typeof(ImageContent))]
     public class BaseContent
     {
-        [BsonId]
+       /* [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string ContentId { get; set; }
+        public string ContentId { get; set; }*/
     }
 }

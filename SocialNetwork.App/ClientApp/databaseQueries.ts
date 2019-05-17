@@ -6,6 +6,7 @@
     gender: string;
     password: string;
     feed: string;
+    groupFeedIds: string[];
     publicPostIds: string[];
     subscriberIds: string[];
     subscriptionIds: string[];
@@ -33,9 +34,30 @@ export interface IComment {
     text: string; 
 }
 
+export interface IGroupFeed {
+
+    groupFeedId: string;
+
+    groupFeedName: string;
+    groupPostIds: string[];
+    usersInGroupFeed: string[];
+}
+
+export interface ITextContent {
+    text: string;
+}
+
+
+
+export interface ICreatePost {
+    postContent: ITextContent;
+    comments: Array<IComment>;
+    nameOfPoster: string;
+}
+
 export class ApplicationState {
-    static apiUrl: string = 'http://localhost:50605/api/';
-    static url: string = 'http://localhost:50605/';
+    static apiUrl: string = 'http://localhost:52135/api/';
+    static url: string = 'http://localhost:52135/';
 }
 
 export class DataBaseQuery {
@@ -136,6 +158,16 @@ export class DataBaseQuery {
             .catch(err => console.log("Error while fetching posts:", err));
     }
 
+    getAllPostsForUser(user: IUser) {
+        let posts: IPost[] = new Array<IPost>();
+        for (let i = 0; i < user.publicPostIds.length; i++) {
+            fetch(`${ApplicationState.apiUrl}Post/${user.publicPostIds[i]}`)
+                .then(response => response.json()
+                    .then((post: IPost) => posts.push(post)));
+        }
+        return posts;
+    }
+
     getUserByCredentials(email: string, password: string) {
         let url = `${ApplicationState.apiUrl}User/ByCredentials/${email}/${password}`;
         console.log(`Fetching: ${url} ...`);
@@ -153,6 +185,63 @@ export class DataBaseQuery {
             });
         return userToLogin;
     }
+
+    getGroupFeed(id: string) {
+        let url = `${ApplicationState.apiUrl}GroupFeed/${id}`;
+        console.log(`Fetching: ${url} ...`);
+        return fetch(url)
+            .then((response) => response.json())
+            .catch(err => console.log("Error while fetching user:", err));
+    }
+
+    createPost(post: ICreatePost) {
+        let url = `${ApplicationState.apiUrl}Post/`;
+        console.log(`Fetching: ${url} ...`);
+        return fetch(url,
+                {
+                    method: "POST",
+                    headers: new Headers({
+                        'Accept': 'application/json',
+                        "Content-Type": "application/json"
+                    }),
+                    body: JSON.stringify(post)
+                })
+            .then((response) => response.json())
+            .catch(err => console.log("Error while posting post:", err));
+    }
+
+    updateGroupFeed(id: string, groupfeed: IGroupFeed) {
+        let url = `${ApplicationState.apiUrl}GroupFeed/${id}`;
+        console.log(`Fetching: ${url} ...`);
+        return fetch(url,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(groupfeed)
+                })
+            .then((response) => response.json())
+            .catch(err => console.log("Error while putting GroupFeed:", err));
+    }
+
+    updateUser(id: string, user: IUser) {
+        let url = `${ApplicationState.apiUrl}User/${id}`;
+        console.log(`Fetching: ${url} ...`);
+        return fetch(url,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(user)
+                })
+            .then((response) => response.json())
+            .catch(err => console.log("Error while updating user:", err));
+    }
+    /*createTextContent(content: ITextContent) {
+        let url = `${ApplicationState.apiUrl}TextContent/`;
+    }*/
 }
 
 function getCookie() {
