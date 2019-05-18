@@ -204,7 +204,8 @@ namespace SocialNetwork.App.Dataseeding
                 PostContent = new TextContent()
                 {
                     Text = "Hvad skal spise i aften Susanne?"
-                }
+                },
+                NameOfPoster = "Ole Andersen"
             };
             PostByOleCommentedBySusanne.Comments.Add(new Comment()
             {
@@ -223,7 +224,8 @@ namespace SocialNetwork.App.Dataseeding
                 PostContent = new TextContent()
                 {
                     Text = "Husk nu ikke at ændre connectionstring!"
-                }
+                },
+                NameOfPoster = "Ole Andersen"
             };
             PostByOleCommentedByNiels.Comments.Add(new Comment()
             {
@@ -250,7 +252,8 @@ namespace SocialNetwork.App.Dataseeding
                 PostContent = new TextContent()
                 {
                     Text = "Hvem vil I stemme på?"
-                }
+                },
+                NameOfPoster = "Niels Pedersen"
             };
             PostByNielsCommentedByOle.Comments.Add(new Comment()
             {

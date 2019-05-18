@@ -15,8 +15,8 @@ const routes = [
     { path: '/block-user', component: require('./components/block-user/block-user.vue.html') },
     { path: '/sign-up', component: require('./components/sign-up/sign-up.vue.html') },
     { path: '/CreatePost', component: require('./components/CreatePost/CreatePost.vue.html') },
-  
-    { path: '/feed', component: require('./components/feed/feed.vue.html') }
+    { path: '/feed', component: require('./components/feed/feed.vue.html') },
+    { path: '/post', component: require('./components/post/post.vue.html') }
 ];
 
 new Vue({
