@@ -1,13 +1,14 @@
 <template>
     <div>
+        <h1>Welcome {{currentUser.firstName}}!</h1>
         <div class="media text-muted pt-3 wall">
             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray entirepost">
                 <div v-for="(post, index) in posts" class="post">
-                    <img src="/Images/icons8-administrator-male-52.png" width="40" height="40" />
+                    <img src="/Images/icons8-administrator-male-52.png" width="40" height="40"/>
                     <strong class="d-block text-gray-dark mainpost">{{currentUser.firstName}} {{currentUser.lastName}}</strong>
                     <p>{{post.postContent.text}}</p>
                     <div v-for="comment in post.comments" class="comment">
-                        <img src="/Images/icons8-administrator-male-52.png" width="15" height="15" />
+                        <img src="/Images/icons8-administrator-male-52.png" width="15" height="15"/>
                         <strong class="d-block text-gray-dark">{{comment.firstName}} {{comment.lastName}}, </strong>
                         {{comment.text}}
                     </div>
